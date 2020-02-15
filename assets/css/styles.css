@@ -1,0 +1,27 @@
+body {
+  background-color: rgba(211, 211, 211, 0.897);
+}
+
+.box {
+  background-color: white;
+}
+
+.summary-text {
+  font-size: 20px;
+}
+
+p {
+  padding: 10px;
+}
+
+h2 {
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 5px;
+}
+
+h3 {
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 5px;
+}
