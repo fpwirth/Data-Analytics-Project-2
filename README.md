@@ -15,6 +15,6 @@ The focus of this project is looking at electricity generation and emissions to 
 ### Contents
 | File                        | Description                                                                                     |
 |-----------------------------|-------------------------------------------------------------------------------------------------|
-|images\energy_db_ERD.png     |ERD of our energy_db postgresSQL database.  Our semi-relational view of energy data, weather data and air quality by state and/or region|
+|energy_emissions\assets\images\energy_db_ERD.png     |ERD of our energy_db postgresSQL database.  Our semi-relational view of energy data, weather data and air quality by state and/or region|
 |notebooks\AQI.ipynb          |Jupyter notebook that imports and cleans the air quality data by state.                          |
-
+|notebooks\Raw Data Importing.ipynb|Notebook that imports all of the EIA data|
