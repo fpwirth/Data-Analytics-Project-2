@@ -1,0 +1,51 @@
+﻿state,region
+WA,Pacific
+OR,Pacific
+CA,Pacific
+MT,Montain
+ID,Montain
+WY,Montain
+NV,Montain
+AZ,Montain
+UT,Montain
+CO,Montain
+NM,Montain
+ND,West North Central
+SD,West North Central
+NE,West North Central
+KS,West North Central
+MN,West North Central
+IA,West North Central
+MO,West North Central
+TX,West South Central
+OK,West South Central
+AR,West South Central
+LA,West South Central
+WI,East North Central
+IL,East North Central
+MI,East North Central
+IN,East North Central
+OH,East North Central
+KY,East South Central
+TN,East South Central
+MS,East South Central
+AL,East South Central
+NY,Middle Atlantic
+PA,Middle Atlantic
+NJ,Middle Atlantic
+ME,New England
+VT,New England
+NH,New England
+MA,New England
+CT,New England
+RI,New England
+MD,South Atlantic
+DE,South Atlantic
+WV,South Atlantic
+VA,South Atlantic
+NC,South Atlantic
+SC,South Atlantic
+GA,South Atlantic
+FL,South Atlantic
+AK,Pacific
+HI,Pacific
