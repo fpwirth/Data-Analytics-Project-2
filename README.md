@@ -5,6 +5,18 @@
 ### Description
 The focus of this project is looking at electricity generation and emissions to see if there is a relationship with temperature and air quality by region in the US.  Our rationale is that with climate change, our transition from coal to cleaner fuels and our changing EPA rules we should see some interesting trends over these last few years.  Questions we are hoping to answer include: is our air getting cleaner, are different parts of the country faring better or worse, is there a relationship between emissions and temperature? 
 
+### Steps to Recreate Environment
+|Step # |Step Description                                                                                   |
+|-------|---------------------------------------------------------------------------------------------------|
+|1.     |Clone the repository to your computer.                                                             |
+|2.     |Start a session of PostgresSQL administrator                                                       |
+|3.     |Create a database called "energy_db"                                                               |
+|4.     |Run the ddl sql script "energy_db_ddl", this will create all of the tables, keys/indexes and views.|
+|5.     |Run the notebook "AQI.ipynb", this will load and clean the air quality data                        |
+|6.     |Run the notebook "Raw Data Importing.ipynb", this will load and clean the EIA energy/emissions data|
+|7.     |Run the notebook "import_data.ipynb", this will import the csv's, the outputs of the previous notebooks, and some additional metadata found in the raw-data folder|
+|8.     |Open the site and enjoy!                                                                           |
+
 ### Link to Site
 [Energy and Clean Air Analysis Dashboard](https://fpwirth.github.io/Data-Analytics-Project-2/)
 
