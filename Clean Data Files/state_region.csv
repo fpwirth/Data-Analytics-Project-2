@@ -2,14 +2,14 @@
 WA,Pacific
 OR,Pacific
 CA,Pacific
-MT,Montain
-ID,Montain
-WY,Montain
-NV,Montain
-AZ,Montain
-UT,Montain
-CO,Montain
-NM,Montain
+MT,Mountain
+ID,Mountain
+WY,Mountain
+NV,Mountain
+AZ,Mountain
+UT,Mountain
+CO,Mountain
+NM,Mountain
 ND,West North Central
 SD,West North Central
 NE,West North Central
@@ -49,3 +49,6 @@ GA,South Atlantic
 FL,South Atlantic
 AK,Pacific
 HI,Pacific
+DC,Middle Atlantic
+PR,South Atlantic
+US-TOTAL,US

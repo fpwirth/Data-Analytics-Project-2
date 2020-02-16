@@ -1,6 +1,6 @@
 ﻿region,region_group
 Pacific,West
-Montain,West
+Mountain,West
 West North Central,Midwest
 West South Central,South
 East North Central,Midwest
@@ -8,3 +8,4 @@ East South Central,South
 Middle Atlantic,Northeast
 New England,Northeast
 South Atlantic,South
+US,US (Total)

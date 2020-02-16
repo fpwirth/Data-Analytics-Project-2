@@ -33,6 +33,7 @@ CREATE TABLE "state" (
 
 CREATE TABLE "region" (
     "region" varchar   NOT NULL,
+	"region_group" varchar,
     CONSTRAINT "pk_region" PRIMARY KEY (
         "region"
      )
@@ -40,22 +41,22 @@ CREATE TABLE "region" (
 
 CREATE TABLE "facility" (
     "facility_id" varchar   NOT NULL,
-    "frs_id" varchar   NOT NULL,
+    "frs_id" varchar NULL,
     "facility_name" varchar   NOT NULL,
     "state" varchar   NOT NULL,
-    "latitude" float   NOT NULL,
-    "longitude" float   NOT NULL,
+    "latitude" float NULL,
+    "longitude" float NULL,
     CONSTRAINT "pk_facility" PRIMARY KEY (
         "facility_id"
      )
 );
 
 CREATE TABLE "facility_emissions" (
-    "year" int   NOT NULL,
     "facility_id" varchar   NOT NULL,
-    "emissions_mt" bigint   NOT NULL,
+    "year" int   NOT NULL,	
+    "emissions_mt" bigint NULL,
     CONSTRAINT "pk_facility_emissions" PRIMARY KEY (
-        "year","facility_id"
+        "facility_id", "year"
      )
 );
 
@@ -64,11 +65,11 @@ CREATE TABLE "state_data" (
     "state" varchar   NOT NULL,
     "producer_type" varchar   NOT NULL,
     "energy_source" varchar   NOT NULL,
-    "co2_mt" bigint   NOT NULL,
-    "so2_mt" bigint   NOT NULL,
-    "nox_mt" bigint   NOT NULL,
-    "consumption" bigint   NOT NULL,
-    "generation_mwh" bigint   NOT NULL,
+    "co2_mt" float   NULL,
+    "so2_mt" float    NULL,
+    "nox_mt" float    NULL,
+    "consumption" float   NULL,
+    "generation_mwh" float   NULL,
     CONSTRAINT "pk_state_data" PRIMARY KEY (
         "year","state","producer_type","energy_source"
      )
@@ -77,19 +78,19 @@ CREATE TABLE "state_data" (
 CREATE TABLE "region_degree_days" (
     "year" int   NOT NULL,
     "region" varchar   NOT NULL,
-    "heating_degree_days" bigint   NOT NULL,
-    "cooling_degree_days" bigint   NOT NULL,
+    "heating_degree_days" bigint   NULL,
+    "cooling_degree_days" bigint   NULL,
     CONSTRAINT "pk_region_degree_days" PRIMARY KEY (
         "year","region"
      )
 );
 
 CREATE TABLE "state_greenhouse_emissions" (
-    "year" int   NOT NULL,
     "state" varchar   NOT NULL,
-    "greenhouse_emissions" bigint   NOT NULL,
+    "year" int   NOT NULL,	
+    "greenhouse_emissions" float   NULL,
     CONSTRAINT "pk_state_greenhouse_emissions" PRIMARY KEY (
-        "year","state"
+        "state", "year"
      )
 );
 
