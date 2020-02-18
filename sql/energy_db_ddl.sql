@@ -22,6 +22,8 @@ DROP TABLE IF EXISTS facility_emissions;
 DROP TABLE IF EXISTS region;
 DROP TABLE IF EXISTS facility;
 DROP TABLE IF EXISTS state;
+--drop views if they exist
+DROP VIEW IF EXISTS top_10_coal_state_stats;
 
 CREATE TABLE "state" (
     "state" varchar   NOT NULL,
@@ -151,3 +153,28 @@ REFERENCES "region" ("region");
 ALTER TABLE "air_quality" ADD CONSTRAINT "fk_air_quality_state" FOREIGN KEY("state")
 REFERENCES "state" ("state");
 
+-- create views for analysis
+CREATE VIEW top_10_coal_state_stats
+AS
+    WITH top_10_coal_states
+	  AS
+	   (
+		  SELECT state,
+				 generation_mwh
+			FROM state_data
+		   WHERE generation_mwh IS NOT NULL	
+			 AND energy_source = 'Coal'
+			 AND year = 2018
+			 AND state <> 'US'
+		ORDER BY generation_mwh DESC
+		   LIMIT 10
+	   )
+  SELECT SD.state,
+  		 SD.year,
+		 SD.generation_mwh,
+		 SD.co2_mt,
+		 SD.so2_mt,
+		 SD.nox_mt
+	FROM top_10_coal_states TOP INNER JOIN state_data SD
+	  ON TOP.state = SD.state
+   WHERE energy_source = 'Coal';
