@@ -103,11 +103,27 @@ CREATE TABLE "state_region" (
 );
 
 CREATE TABLE "air_quality" (
-    "year" int   NOT NULL,
     "state" varchar   NOT NULL,
-    "air_quality_avg" float   NOT NULL,
+    "year" int   NOT NULL,
+    "cbsa_code" varchar   NOT NULL,
+    "days_with_aqi" int   NOT NULL,
+    "good_days" int   NULL,
+    "moderate_days" int   NULL,
+    "unhealthy_days" int   NULL,
+    "unhealthy_sensitive_days" int   NULL,
+    "very_unhealthy_days" int   NULL,
+    "hazardous_days" int   NULL,
+    "aqi_max" int   NULL,
+    "aqi_90_percentile" int   NULL,
+    "aqi_median" int   NULL,
+    "days_co" int   NULL,
+    "days_no2" int   NULL,
+    "days_ozone" int   NULL,
+    "days_so2" int   NULL,
+    "days_pm25" int   NULL,
+    "days_pm10" int   NULL,
     CONSTRAINT "pk_air_quality" PRIMARY KEY (
-        "year","state"
+        "state","year", "cbsa_code"
      )
 );
 
