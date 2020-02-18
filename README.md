@@ -29,4 +29,10 @@ The focus of this project is looking at electricity generation and emissions to 
 |-----------------------------|-------------------------------------------------------------------------------------------------|
 |energy_emissions\assets\images\energy_db_ERD.png     |ERD of our energy_db postgresSQL database.  Our semi-relational view of energy data, weather data and air quality by state and/or region|
 |notebooks\AQI.ipynb          |Jupyter notebook that imports and cleans the air quality data by state.                          |
+|notebooks\group_analysis.ipynb         |scrap notebook, just checking the datasets out       |
+|notebooks\import_data.ipynb            |Notebook that will import all of the csv files in the "Clean Data Files" folder|
 |notebooks\Raw Data Importing.ipynb|Notebook that imports all of the EIA data|
+|sql\energy_db_ddl                  |Data definition language (ddl) for the energy_db database.  Run this script to create all the necessary tables/keys/views in the postgreSQL database.|
+|sql\foreign_key_list.sql           |script to retrieve all foreign keys that exist in the database, helpful info when dropping and adding the indexes.  |
+
+
