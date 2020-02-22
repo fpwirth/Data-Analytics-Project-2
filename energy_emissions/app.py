@@ -27,7 +27,7 @@ connection = psycopg2.connect(host=hostname, user=username, password=password, d
 # Save all references needed to to the views
 state_list = pd.read_sql_query('select * from "state_list"',con=connection)
 state_data = pd.read_sql_query('select * from "state_data_by_year"',con=connection)
-facility_data = pd.read_sql_query('select * from "facility_data_by_year"',con=connection)
+facility_data = pd.read_sql_query('select * from "facility_emissions_by_year"',con=connection)
 
 #####################
 # Flask Setup
