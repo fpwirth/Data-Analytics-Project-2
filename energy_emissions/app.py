@@ -26,8 +26,8 @@ connection = psycopg2.connect(host=hostname, user=username, password=password, d
 
 # Save all references needed to to the views
 state_list = pd.read_sql_query('select * from "state_list"',con=connection)
-state_data = pd.read_sql_query('select * from "state_data"',con=connection)
-facility_data = pd.read_sql_query('select * from "facility_data"',con=connection)
+state_data = pd.read_sql_query('select * from "state_data_by_year"',con=connection)
+facility_data = pd.read_sql_query('select * from "facility_data_by_year"',con=connection)
 
 #####################
 # Flask Setup
@@ -40,7 +40,7 @@ app = Flask(__name__)
 ####################
 
 @app.route("/")
-def welcome():
+def home():
     """Main page"""
     return render_template ("index.html")
 
@@ -51,13 +51,13 @@ def statelist():
     return jsonify(state_list)
 
 @app.route("/data/facility_data")
-def facility():
+def facilitydata():
     """Return information related to facility data"""
 
     return jsonify(facility_data)
 
 @app.route("/data/state_data")
-def state():
+def statedata():
     """Return information related to state data"""
 
     return jsonify(state_data)
