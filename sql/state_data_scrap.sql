@@ -4,8 +4,11 @@
   SELECT *
     FROM facility_emissions_by_year;
 	
-	
+  SELECT * FROM state_greenhouse_emissions
+  
   SELECT * FROM state_list ORDER BY state;
+  
+  SELECT * FROM region_degree_days
   
 */
 
@@ -236,16 +239,46 @@
 				 sd.generation_mwh
 			FROM state_data sd
 		   WHERE sd.energy_source = 'Total'		   
-	   )
+	   )		   
   SELECT s.state,
   		 s.state_name,
 		 r.region,
 		 r.region_group,
 		 std.year,
 		 std.generation_mwh AS generation_mwh_total,
+		 sge.greenhouse_emissions,
+		 rdd.heating_degree_days,
+		 rdd.cooling_degree_days,
 		 std.co2_mt AS co2_mt_total,
 		 std.so2_mt AS so2_mt_total,
-		 std.nox_mt AS nox_mt_total
+		 std.nox_mt AS nox_mt_total,
+		 scd.generation_mwh AS generation_mwh_coal,
+		 scd.co2_mt AS co2_mt_coal,
+		 scd.so2_mt AS so2_mt_coal,
+		 scd.nox_mt AS nox_mt_coal,
+		 sgd.generation_mwh AS generation_mwh_geothermal,
+		 sgbd.generation_mwh AS generation_mwh_geothermal_btu,
+		 shd.generation_mwh AS generation_mwh_hydro,
+		 snd.generation_mwh AS generation_mwh_ng,
+		 snd.co2_mt AS co2_mt_ng,
+		 snd.so2_mt AS so2_mt_ng,
+		 snd.nox_mt AS nox_mt_ng,
+		 sncd.generation_mwh AS generation_mwh_nuclear,
+		 sod.generation_mwh AS generation_mwh_other,
+		 sod.co2_mt AS co2_mt_other,
+		 sod.so2_mt AS so2_mt_other,
+		 sod.nox_mt AS nox_mt_other,
+		 sobd.generation_mwh AS generation_mwh_other_biomass,
+		 sogd.generation_mwh AS generation_mwh_other_gas,
+		 sogbd.generation_mwh AS generation_mwh_other_gas_btu,
+		 spd.generation_mwh AS generation_mwh_pumped,
+		 ssd.generation_mwh AS generation_mwh_solar,
+		 swd.generation_mwh AS generation_mwh_wind,
+		 sptd.generation_mwh AS generation_mwh_petro,
+		 sptd.co2_mt AS co2_mt_petro,
+		 sptd.so2_mt AS so2_mt_petro,
+		 sptd.nox_mt AS nox_mt_petro,
+		 swwd.generation_mwh AS generation_mwh_wind_wood
     FROM state s INNER JOIN state_region sr
 	  ON s.state = sr.state INNER JOIN region r
 	  ON sr.region = r.region INNER JOIN state_total_data std
@@ -279,8 +312,12 @@
 	  ON s.state = sptd.state 
 	 AND std.year = sptd.year LEFT OUTER JOIN state_wind_wood_data swwd
 	  ON s.state = swwd.state 
-	 AND std.year = swwd.state
-	   
+	 AND std.year = swwd.year INNER JOIN state_greenhouse_emissions sge
+	  ON s.state = sge.state
+	 AND std.year = sge.year INNER JOIN region_degree_days rdd
+	  ON r.region = rdd.region
+	 AND std.year = rdd.year
+	 
 
 
    

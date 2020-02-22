@@ -378,6 +378,9 @@ AS
 		 r.region_group,
 		 std.year,
 		 std.generation_mwh AS generation_mwh_total,
+		 sge.greenhouse_emissions,
+		 rdd.heating_degree_days,
+		 rdd.cooling_degree_days,
 		 std.co2_mt AS co2_mt_total,
 		 std.so2_mt AS so2_mt_total,
 		 std.nox_mt AS nox_mt_total,
@@ -441,5 +444,9 @@ AS
 	  ON s.state = sptd.state 
 	 AND std.year = sptd.year LEFT OUTER JOIN state_wind_wood_data swwd
 	  ON s.state = swwd.state 
-	 AND std.year = swwd.year;
+	 AND std.year = swwd.year INNER JOIN state_greenhouse_emissions sge
+	  ON s.state = sge.state
+	 AND std.year = sge.year INNER JOIN region_degree_days rdd
+	  ON r.region = rdd.region
+	 AND std.year = rdd.year;
 	
