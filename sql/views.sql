@@ -473,7 +473,7 @@ AS
 	  ON s.state = sptd.state 
 	 AND std.year = sptd.year LEFT OUTER JOIN state_wind_wood_data swwd
 	  ON s.state = swwd.state 
-	 AND std.year = swwd.year INNER JOIN state_greenhouse_emissions sge
+	 AND std.year = swwd.year LEFT OUTER JOIN state_greenhouse_emissions sge
 	  ON s.state = sge.state
 	 AND std.year = sge.year INNER JOIN region_degree_days rdd
 	  ON r.region = rdd.region
