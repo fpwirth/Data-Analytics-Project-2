@@ -239,12 +239,27 @@
 				 sd.generation_mwh
 			FROM state_data sd
 		   WHERE sd.energy_source = 'Total'		   
-	   )		   
+	   ),
+		 state_air_quality_by_year
+	  AS 
+	   (
+		  SELECT aq.state,
+				 aq.year,
+				 ROUND(SUM(good_days + moderate_days)/(SUM(days_with_aqi)*1.00),3) * 100 AS good_days_percent,
+				 ROUND(SUM(unhealthy_days + unhealthy_sensitive_days + very_unhealthy_days + hazardous_days)
+					   /(SUM(days_with_aqi)*1.00),3) * 100 AS bad_days_percent
+			FROM air_quality aq
+		GROUP BY aq.state,
+				 aq.year
+	   )	   
   SELECT s.state,
   		 s.state_name,
 		 r.region,
 		 r.region_group,
 		 std.year,
+		 RANK() OVER (PARTITION BY s.state ORDER BY std.year) AS state_year_rank,
+		 saqby.good_days_percent,
+		 saqby.bad_days_percent,
 		 std.generation_mwh AS generation_mwh_total,
 		 sge.greenhouse_emissions,
 		 rdd.heating_degree_days,
@@ -252,14 +267,17 @@
 		 std.co2_mt AS co2_mt_total,
 		 std.so2_mt AS so2_mt_total,
 		 std.nox_mt AS nox_mt_total,
+		 scd.consumption AS consumption_coal,
 		 scd.generation_mwh AS generation_mwh_coal,
 		 scd.co2_mt AS co2_mt_coal,
 		 scd.so2_mt AS so2_mt_coal,
 		 scd.nox_mt AS nox_mt_coal,
+		 snd.consumption AS consumption_ng,
 		 snd.generation_mwh AS generation_mwh_ng,
 		 snd.co2_mt AS co2_mt_ng,
 		 snd.so2_mt AS so2_mt_ng,
 		 snd.nox_mt AS nox_mt_ng,
+		 sptd.consumption AS consumption_petro,
 		 sptd.generation_mwh AS generation_mwh_petro,
 		 sptd.co2_mt AS co2_mt_petro,
 		 sptd.so2_mt AS so2_mt_petro,
@@ -269,16 +287,27 @@
 		 sod.so2_mt AS so2_mt_other,
 		 sod.nox_mt AS nox_mt_other,
 		 sobd.generation_mwh AS generation_mwh_other_biomass,
+		 sobd.co2_mt AS co2_mt_other_biomass,
+		 sobd.so2_mt AS so2_mt_other_biomass,
+		 sobd.nox_mt AS nox_mt_other_biomass,
+		 sogd.consumption AS consumption_other_gas,
 		 sogd.generation_mwh AS generation_mwh_other_gas,
-		 sogbd.generation_mwh AS generation_mwh_other_gas_btu,
+		 sogd.co2_mt AS co2_mt_other_gas,
+		 sogd.so2_mt AS so2_mt_other_gas,
+		 sogd.nox_mt AS nox_mt_other_gas,	
+		 sgd.generation_mwh AS generation_mwh_geothermal,
+		 sgd.co2_mt AS co2_mt_other_geothermal,
+		 sgd.so2_mt AS so2_mt_other_geothermal,
+		 sgd.nox_mt AS nox_mt_other_geothermal,	
+		 swwd.generation_mwh AS generation_mwh_wind_wood,
+		 swwd.co2_mt AS co2_mt_other_wind_wood,
+		 swwd.so2_mt AS so2_mt_other_wind_wood,
+		 swwd.nox_mt AS nox_mt_other_wind_wood,		 
 		 sncd.generation_mwh AS generation_mwh_nuclear,
 		 spd.generation_mwh AS generation_mwh_pumped,
 		 ssd.generation_mwh AS generation_mwh_solar,
 		 swd.generation_mwh AS generation_mwh_wind,
-		 sgd.generation_mwh AS generation_mwh_geothermal,
-		 sgbd.generation_mwh AS generation_mwh_geothermal_btu,
-		 shd.generation_mwh AS generation_mwh_hydro,		 
-		 swwd.generation_mwh AS generation_mwh_wind_wood
+		 shd.generation_mwh AS generation_mwh_hydro
     FROM state s INNER JOIN state_region sr
 	  ON s.state = sr.state INNER JOIN region r
 	  ON sr.region = r.region INNER JOIN state_total_data std
@@ -316,7 +345,9 @@
 	  ON s.state = sge.state
 	 AND std.year = sge.year INNER JOIN region_degree_days rdd
 	  ON r.region = rdd.region
-	 AND std.year = rdd.year
+	 AND std.year = rdd.year INNER JOIN state_air_quality_by_year saqby
+	  ON s.state = saqby.state
+	 AND std.year = saqby.year
 	 
 
 
