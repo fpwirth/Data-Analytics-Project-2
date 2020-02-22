@@ -48,19 +48,19 @@ def home():
 def statelist():
     """Return information related to states"""
 
-    return jsonify(state_list)
+    return state_list.to_json()
 
 @app.route("/data/facility_data")
 def facilitydata():
     """Return information related to facility data"""
 
-    return jsonify(facility_data)
+    return facility_data.to_json()
 
 @app.route("/data/state_data")
 def statedata():
     """Return information related to state data"""
 
-    return jsonify(state_data)
+    return state_data.to_json()
 
 if __name__ == '__main__':
     app.run(debug=True)
