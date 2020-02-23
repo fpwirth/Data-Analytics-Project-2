@@ -23,7 +23,7 @@ The focus of this project is looking at electricity generation and emissions to 
 
 ### Images
 !['Facility Dashboard Image not available'](/energy_emissions/assets/images/facility_data_dashboard.png)\
-*Database (energy_db) ERD*
+*Facility data dashboard screenshot*
 
 !['ERD Image not available'](/energy_emissions/assets/images/energy_db_ERD.png)\
 *Database (energy_db) ERD*
@@ -38,6 +38,6 @@ The focus of this project is looking at electricity generation and emissions to 
 |notebooks\Raw Data Importing.ipynb|Notebook that imports all of the EIA data|
 |sql\energy_db_ddl                  |Data definition language (ddl) for the energy_db database.  Run this script to create all the necessary tables/keys/views in the postgreSQL database.|
 |sql\foreign_key_list.sql           |script to retrieve all foreign keys that exist in the database, helpful info when dropping and adding the indexes.  |
-|sql\views.sql  |script to create all of the views that will be used by the flask app
+|sql\views.sql  |script to create all of the views that will be used by the flask app|
 
 
