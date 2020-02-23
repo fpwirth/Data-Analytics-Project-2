@@ -81,21 +81,22 @@ h4 {
   width: 140px; 
   padding-top: 10px;
   margin-top: 10px;
-
+  padding-left: 5px;
 }
 
 #year_slider {
 
   margin-left: 30px;
-
-}
-
-fieldset {
-
-  padding-left: 5px;
+  margin-top: 5px;
 
 }
 
 .ui-controlgroup.ui-controlgroup-vertical > .ui-controlgroup-label {
   text-align: center;
+}
+
+#filter_reset {
+
+  margin-left: 25px;
+
 }
