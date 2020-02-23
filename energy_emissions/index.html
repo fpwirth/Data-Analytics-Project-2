@@ -6,13 +6,11 @@
   <title>Data Analytics - Project 2</title>
   <!-- reset the CSS -->
   <link rel="stylesheet" href="assets/css/reset.css">
-  <!-- basic jquery file-->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <!-- javascript files for jquery and jquery ui-->
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
+  <!-- bootstrap for teh formatting -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <!-- css for jquery ui and ui theme (green) -->
   <link rel="stylesheet" href="assets/css/jquery-ui.css">
   <link rel="stylesheet" href="assets/css/jquery-ui.structure.css">
@@ -22,10 +20,7 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
   <!-- link to custom CSS, used in all html pages in the project-->
-  <link rel="stylesheet" href="assets/css/styles.css">
-  <!-- d3 javascript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
-  
+  <link rel="stylesheet" href="assets/css/styles.css">  
 </head>
 <body>
   <!-- nav bar, code is used in all html pages-->
@@ -68,23 +63,18 @@
       <div class= "col-md-1">
         <div class="filter_div">
           <h4>Filter</h4>
+          <button class="ui-button ui-widget ui-corner-all" id="filter_reset" name="filter_reset">Reset</button>
           <hr>
-          <p>
-            <label for="year_selected">Year:</label>
-            <input type="text" id="year_selected" readonly class="input_short">
-          </p>          
+          <label for="year_selected">Year:</label>
+          <input type="text" id="year_selected" readonly class="input_short">          
           <div id="year_slider" style="height:100px;"></div>
           <hr>
-          <div class="widget">
             <fieldset>
               <h4>Power Sources</h4>
               <div class="controlgroup">
+                <p>Dirtier</p>
                 <label for="coal_filter">Coal</label>
                 <input type="checkbox" name="coal_filter" id="coal_filter" checked="checked"><br>
-                <label for="geo_filter">Geothermal</label>
-                <input type="checkbox" name="geo_filter" id="geo_filter" checked="checked"><br>
-                <label for="hydro_filter">Hydroelectric</label>
-                <input type="checkbox" name="hydro_filter" id="hydro_filter" checked="checked"><br>
                 <label for="ng_filter">Natural Gas</label>
                 <input type="checkbox" name="ng_filter" id="ng_filter" checked="checked"><br>
                 <label for="nuc_filter">Nuclear</label>
@@ -97,17 +87,21 @@
                 <input type="checkbox" name="coal_filter" id="othergas_filter" checked="checked"><br>
                 <label for="petro_filter">Petroleum</label>
                 <input type="checkbox" name="coal_filter" id="petro_filter" checked="checked"><br>
+                <label for="wood_filter">Wood</label>
+                <input type="checkbox" name="wood_filter" id="wood_filter" checked="checked"><br>
+                <p>Greener</p>
+                <label for="geo_filter">Geothermal</label>
+                <input type="checkbox" name="geo_filter" id="geo_filter" checked="checked"><br>
+                <label for="hydro_filter">Hydroelectric</label>
+                <input type="checkbox" name="hydro_filter" id="hydro_filter" checked="checked"><br>
                 <label for="pump_filter">Pumped Storage</label>
                 <input type="checkbox" name="coal_filter" id="pump_filter" checked="checked"><br>
                 <label for="solar_filter">Solar</label>
                 <input type="checkbox" name="coal_filter" id="solar_filter" checked="checked"><br>
                 <label for="wind_filter">Wind</label>
                 <input type="checkbox" name="coal_filter" id="wind_filter" checked="checked"><br>
-                <label for="wood_filter">Wood</label>
-                <input type="checkbox" name="wood_filter" id="wood_filter" checked="checked">
               </div>
             </fieldset>
-          </div>
         </div>
       </div>
       <!-- div to put all the chart divs in-->
@@ -140,7 +134,10 @@
     </div>   
   </div>
   </div>
-<!-- custom application javascript file-->
+  <div id="sysmessage_dialog" title="System Message">
+    <span id="message_text"></span>
+  </div>
+<!-- custom application javascript file, using jquery and jquery ui-->
 <script src="assets\js\app.js"></script>  
 </body>
 </html>
