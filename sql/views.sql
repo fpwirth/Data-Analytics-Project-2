@@ -190,19 +190,6 @@ AS
 			FROM state_data sd
 		   WHERE sd.energy_source = 'Geothermal'		   
 	   ),	   
-		 state_geothermal_btu_data
-	  AS
-	   (
-		  SELECT sd.state,
-				 sd.year,
-				 sd.co2_mt,
-				 sd.so2_mt,
-				 sd.nox_mt,
-				 sd.consumption,
-				 sd.generation_mwh
-			FROM state_data sd
-		   WHERE sd.energy_source = 'Geothermal (Billion Btu)'		   
-	   ),	   
 		 state_hydro_data
 	  AS
 	   (
@@ -280,19 +267,6 @@ AS
 				 sd.generation_mwh
 			FROM state_data sd
 		   WHERE sd.energy_source = 'Other Gases'		   
-	   ),	   
-		 state_othergas_btu_data
-	  AS
-	   (
-		  SELECT sd.state,
-				 sd.year,
-				 sd.co2_mt,
-				 sd.so2_mt,
-				 sd.nox_mt,
-				 sd.consumption,
-				 sd.generation_mwh
-			FROM state_data sd
-		   WHERE sd.energy_source = 'Other Gases (Billion Btu)'		   
 	   ),	   
 		 state_petro_data
 	  AS
@@ -447,9 +421,7 @@ AS
 	  ON s.state = scd.state 
 	 AND std.year = scd.year LEFT OUTER JOIN state_geothermal_data sgd
 	  ON s.state = sgd.state 
-	 AND std.year = sgd.year LEFT OUTER JOIN state_geothermal_btu_data sgbd
-	  ON s.state = sgbd.state 
-	 AND std.year = sgbd.year LEFT OUTER JOIN state_hydro_data shd
+	 AND std.year = sgd.year LEFT OUTER JOIN state_hydro_data shd
 	  ON s.state = shd.state 
 	 AND std.year = shd.year LEFT OUTER JOIN state_ng_data snd
 	  ON s.state = snd.state 
@@ -461,9 +433,7 @@ AS
 	  ON s.state = sobd.state 
 	 AND std.year = sobd.year LEFT OUTER JOIN state_othergas_data sogd
 	  ON s.state = sogd.state 
-	 AND std.year = sogd.year LEFT OUTER JOIN state_othergas_btu_data sogbd
-	  ON s.state = sogbd.state 
-	 AND std.year = sogbd.year LEFT OUTER JOIN state_pumped_data spd
+	 AND std.year = sogd.year LEFT OUTER JOIN state_pumped_data spd
 	  ON s.state = spd.state 
 	 AND std.year = spd.year LEFT OUTER JOIN state_solar_data ssd
 	  ON s.state = ssd.state 

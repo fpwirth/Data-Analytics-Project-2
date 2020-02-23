@@ -50,13 +50,54 @@
     </div><!-- /.container-fluid -->
   </nav>
   <div class="container">
-    <div class='jumbotron text-center'>
-        <h1>Energy and Clean Air</h1>
-        <p>Lookin' at stuff related to electricity generation and our air quality</p>
-    </div>      
     <div class="row">
-
+        <div class="col-md-12">
+          <div class="jumbotron text-center">
+            <h1>Energy and Clean Air</h1>
+            <p>Lookin' at stuff related to electricity generation and our air quality</p>
+          </div>      
+        </div>
+    </div>
+    <div class="row">
+      <!-- filter stuff goes in the left most column-->
+      <div class= "col-md-1">
+        <h3>Awesome Filter Section</h3>
+        <hr>
+        <label for="year_select">Select Year: </label>
+        <select id="year_select">
+        </select>
+      </div>
+      <!-- div to put all the chart divs in-->
+      <div class="col-md-11">
+        <!-- this row will only contain one column, for the map-->
+        <div class="row">
+          <div class="col-md-12">
+            <!-- throw the heat map in here, #heat_map_chart-->
+            <div id="heat_map_chart">
+            </div>
+          </div>
+        </div>
+        <!-- this row can contain smaller charts, currently setup for three (chart1, chart2, chart3)-->
+        <!-- we can change this, i'm just putting place-holders-->
+        <div class="row">
+          <div class="col-md-4">
+            <!-- put the first smaller chart here-->
+            <div id= "chart1">
+            </div>
+            <div class="col-md-4">
+            <!-- put the second smaller chart here-->
+            <div id= "chart2">
+            </div>
+            <!-- put the third smaller chart here-->
+            <div id= "chart3">
+            </div>  
+          </div>
+        </div>
+      </div>
     </div>   
   </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="assets\js\app.js"></script>
 </body>
 </html>
