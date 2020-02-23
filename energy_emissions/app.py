@@ -4,10 +4,6 @@
 ### Import dependencies ###
 ###########################
 
-import sqlalchemy
-from sqlalchemy.ext.automap import automap_base
-from sqlalchemy.orm import Session
-from sqlalchemy import create_engine
 from flask import Flask, jsonify, render_template, redirect, request
 import pandas as pd
 import psycopg2
@@ -19,7 +15,7 @@ import psycopg2.extras
 
 hostname = 'localhost'
 username = 'postgres'
-password = 'Pandas'
+password = 'postgres'
 database = 'energy_db'
 
 connection = psycopg2.connect(host=hostname, user=username, password=password, dbname=database )
