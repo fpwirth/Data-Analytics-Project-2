@@ -47,7 +47,7 @@ def statelist():
 @app.route("/data/facility_data")
 def facilitydata():
     """Return information related to facility data"""
-    return facility_data.to_json()
+    return facility_data.to_json(orient='records')
 
 @app.route("/data/state_data")
 def statedata():
