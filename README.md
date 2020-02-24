@@ -22,10 +22,10 @@ The focus of this project is looking at electricity generation and emissions to 
 [Energy and Clean Air Analysis Dashboard](https://fpwirth.github.io/Data-Analytics-Project-2/)
 
 ### Images
-!['Facility Dashboard Image not available'](/energy_emissions/assets/images/facility_data_dashboard.png)\
+!['Facility Dashboard Image not available'](/energy_emissions/static/images/facility_data_dashboard.png)\
 *Facility data dashboard screenshot*
 
-!['ERD Image not available'](/energy_emissions/assets/images/energy_db_ERD.png)\
+!['ERD Image not available'](/energy_emissions/static/images/energy_db_ERD.png)\
 *Database (energy_db) ERD*
 
 ### Contents
