@@ -42,17 +42,17 @@ def home():
 @app.route("/data/state_list")
 def statelist():
     """Return information related to states"""
-    return state_list.to_json()
+    return state_list.to_json(orient='records')
 
 @app.route("/data/facility_data")
 def facilitydata():
     """Return information related to facility data"""
-    return facility_data.to_json()
+    return facility_data.to_json(orient='records')
 
 @app.route("/data/state_data")
 def statedata():
     """Return information related to state data"""
-    return state_data.to_json()
+    return state_data.to_json(orient='records')
 
 if __name__ == '__main__':
     app.run()
