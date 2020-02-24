@@ -100,3 +100,9 @@ h4 {
   margin-left: 25px;
 
 }
+
+#heatmap {
+  position:relative;
+  width:100%;
+  height:600px;
+}
