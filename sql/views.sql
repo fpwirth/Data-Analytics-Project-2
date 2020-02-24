@@ -13,6 +13,7 @@ DROP VIEW IF EXISTS facility_emissions_by_year;
 DROP VIEW IF EXISTS facility_list;
 DROP VIEW IF EXISTS state_list;
 DROP VIEW IF EXISTS state_data_by_year;
+DROP VIEW IF EXISTS state_aqi_pct_change;
 
 -- create views for analysis, charting, drop-down lists, pop-ups and...fun
 
@@ -450,4 +451,44 @@ AS
 	 AND std.year = rdd.year INNER JOIN state_air_quality_by_year saqby
 	  ON s.state = saqby.state
 	 AND std.year = saqby.year;
+
+-- view to show the change in air quality percent from 1990 to 2018
+CREATE VIEW state_aqi_pct_change
+AS
+    WITH state_aqi_percent
+	  AS
+	   (
+		  SELECT state,
+				 year,
+				 ROUND((SUM(good_days + moderate_days)
+					/SUM(days_with_aqi*1.00)),2)*100 AS Good_Days_Percent,
+				 ROUND((SUM(unhealthy_days + unhealthy_sensitive_days + very_unhealthy_days + hazardous_days)
+					/SUM(days_with_aqi*1.00)),2)*100 AS Bad_Days_Percent
+			FROM air_quality
+		GROUP BY state,
+				 year
+       ),
+	     state_aqi_1990
+	  AS
+	   (
+		  SELECT *
+			FROM state_aqi_percent
+		   WHERE year = 1990		   
+	   ),
+	     state_aqi_2018
+	  AS
+	   (
+		  SELECT *
+			FROM state_aqi_percent
+		   WHERE year = 2018
+	   )
+  SELECT aqi1.state,
+  		 aqi1.good_days_percent AS good_days_pct_1990,
+		 aqi1.bad_days_percent AS bad_days_pct_1990,
+		 aqi2.good_days_percent AS good_days_pct_2018,
+		 aqi2.bad_days_percent AS bad_days_pct_2018,
+		 aqi2.good_days_percent - aqi1.good_days_percent AS good_days_pct_change,
+		 aqi2.bad_days_percent - aqi1.bad_days_percent AS bad_days_pct_change
+	FROM state_aqi_1990 aqi1 INNER JOIN state_aqi_2018 aqi2
+	  ON aqi1.state = aqi2.state
 	
