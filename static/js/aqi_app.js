@@ -77,13 +77,14 @@ d3.json(url).then(function(data){
     var xAxis = d3.axisBottom()
         .scale(x)
         .tickSize(0)
-        .tickPadding(6);
-
+        .tickPadding(6)
+        
     var yAxis = d3.axisLeft()
         .scale(y)
         .tickSize(2)
         .tickPadding(6);
-        
+    
+   
 
     var layer = svg.selectAll(".layer")
         .data(stackedSeries)
@@ -150,6 +151,7 @@ d3.json(url).then(function(data){
                 })
                 .attr('text-anchor', 'start')
                 .attr('alignment-baseline', 'hanging');
+
 
     
     var timeout = setTimeout(function() {
