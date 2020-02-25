@@ -42,8 +42,9 @@ d3.json(url).then(function(data){
         }
     })
     
+    var states = summaryData.map(d => d.state)
    
-    console.log(summaryData)
+    console.log(states)
     var keys = ['good_days_percent', 'bad_days_percent']
     var stack = d3.stack()
         .keys(keys)
@@ -117,11 +118,12 @@ d3.json(url).then(function(data){
     
     var timeout = setTimeout(function() {
         d3.select("input[value=\"grouped\"]").property("checked", true).each(change);
-        setTimeout(function() {
-            d3.select("input[value=\"percent\"]").property("checked", true).each(change);
-        }, 2000);
+        // setTimeout(function() {
+        //     d3.select("input[value=\"percent\"]").property("checked", true).each(change);
+        // }, 2000);
     }, 2000);
-    
+
+
     function change() {
         clearTimeout(timeout);
         if (this.value === "grouped") transitionGrouped();
