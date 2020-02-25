@@ -23,47 +23,35 @@ var svg = d3
 var formatPercent = d3.format(".0%");
 var formatNumber = d3.format("");
         
-var url = "../static/js/state_data.json"
+var url = "static/js/state_records_test.json"
 
 
 d3.json(url).then(function(data){
     var aqiData = data
     console.log(aqiData)
 
+     // Filter the data to keep only records for the chosen year
+    var filteredData = aqiData.filter(aqiData => aqiData.year === 1995);
+    
+    var summaryData = filteredData.map(function(d){
+        return {
+            year: d.year,
+            good_days_percent: d.good_days_percent,
+            bad_days_percent: d.bad_days_percent,
+            state: d.state
+        }
+    })
     
    
+    console.log(summaryData)
 
+    var keys = summaryData.map(states => states.state)
+    console.log(keys)
 
-    
-
-    var goodDays = data.good_days_percent
-    var badDays = data.bad_days_percent
-    var stateAbrr = data.state
-    var year = data.year
-
-    // var test = Object.keys(goodDays).map(function (key){
-    //     return [goodDays[key]]
-    // });
-    
-    // var objectData = goodDays.map((aqi_good, index) =>{
-    //     return {
-    //         aqi_good: aqi_good,
-    //         aqi_bad: badDays[index],
-    //         state: stateAbrr[index],
-    //         year: year[index]
-    //     }
-    // });
-    
-    // var summaryData = objectData[0]
-
-    // var filteredSummary = summaryData.filter(years => summaryData.year === 1995);
-  
-
-    
-//     var layers = stack
-//         .keys(summaryData.state)
-//         .offset(d3.stackOffsetDiverging)
-//         (summaryData);
+    // var layers = stack
+    //     .keys(summaryData.state)
+    //     .offset(d3.stackOffsetDiverging)
+    //     (summaryData);
 
 //     console.log(summaryData.state)
 //     yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d[1]; }); }),
