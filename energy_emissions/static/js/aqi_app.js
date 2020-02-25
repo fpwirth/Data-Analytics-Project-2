@@ -4,6 +4,7 @@ var stack = d3.stack();
 
 var svgWidth = 960;
 var svgHeight = 500;
+var padding = 700;
 
 var margin = {top: 40, right: 10, bottom: 20, left: 35},
     width = svgWidth - margin.left - margin.right,
@@ -46,6 +47,7 @@ d3.json(url).then(function(data){
    
     console.log(states)
     var keys = ['good_days_percent', 'bad_days_percent']
+    var keysLabel = ['Air Quality Index: Good', 'Air Quality Index: Bad']
     var stack = d3.stack()
         .keys(keys)
         .order(d3.stackOrderDescending);
@@ -70,7 +72,7 @@ d3.json(url).then(function(data){
 
     var color = d3.scaleLinear()
         .domain([0, n - 1])
-        .range(["#aad", "#556"]);
+        .range(["mediumaquamarine", "darkred"]);
 
     var xAxis = d3.axisBottom()
         .scale(x)
@@ -115,6 +117,40 @@ d3.json(url).then(function(data){
         .call(yAxis);
     
     d3.selectAll("input").on("change", change);
+
+
+    var legend = svg.append('g')
+                .attr('class', 'legend')
+                .attr('transform', 'translate(' + (padding + 50) + ', 0)');
+
+            legend.selectAll('rect')
+                .data(keysLabel)
+                .enter()
+                .append('rect')
+                .attr('x', 0)
+                .attr('y', function(d, i){
+                    return i * 18;
+                })
+                .attr('width', 12)
+                .attr('height', 12)
+                .attr('fill', function(d, i){
+                    return color(i);
+                });
+            
+            legend.selectAll('text')
+                .data(keysLabel)
+                .enter()
+                .append('text')
+                .text(function(d){
+                    return d;
+                })
+                .attr('x', 18)
+                .attr('y', function(d, i){
+                    return i * 18;
+                })
+                .attr('text-anchor', 'start')
+                .attr('alignment-baseline', 'hanging');
+
     
     var timeout = setTimeout(function() {
         d3.select("input[value=\"grouped\"]").property("checked", true).each(change);
