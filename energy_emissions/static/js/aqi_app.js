@@ -45,13 +45,11 @@ d3.json(url).then(function(data){
    
     console.log(summaryData)
 
-    var keys = summaryData.map(states => states.state)
-    console.log(keys)
-
-    // var layers = stack
-    //     .keys(summaryData.state)
-    //     .offset(d3.stackOffsetDiverging)
-    //     (summaryData);
+    var stack = d3.stack()
+        .keys(['good_days_percent', 'bad_days_percent'])
+        .order(d3.stackOrderDescending);
+    
+    var stackedSeries = stack(summaryData)
 
 //     console.log(summaryData.state)
 //     yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d[1]; }); }),
