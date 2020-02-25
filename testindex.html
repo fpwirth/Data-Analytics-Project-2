@@ -1,35 +1,153 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Test Heatmap</title>
+<html lang="en">
 
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
-      integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
-      crossorigin=""
-    />
-    <script
-      src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
-      integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
-      crossorigin=""
-    ></script>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <link rel="stylesheet" href="static/css/styles.css" />
-  </head>
-
-  <body>
-    <div id="heatmap"></div>
-
-    <!-- API key -->
-    <script type="text/javascript" src="static/js/config.js"></script>
-
-    <!-- JS -->
-    <!-- <script type="text/javascript" src="static/js/just-crime.js"></script> -->
-    <script type="text/javascript" src="static/js/heatmap.js"></script>
-
-    <!-- Leaflet heatmap plugin-->
-    <script type="text/javascript" src="static/js/leaflet-heat.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>TESTING Energy Emissions</title>
+  <!-- reset the CSS -->
+  <link rel="stylesheet" href="static/css/reset.css">
+  <!-- javascript files for jquery and jquery ui-->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
+  <!-- bootstrap for the formatting -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <!-- css for jquery ui and ui theme (green) -->
+  <link rel="stylesheet" href="static/css/jquery-ui.css">
+  <link rel="stylesheet" href="static/css/jquery-ui.structure.css">
+  <link rel="stylesheet" href="static/css/jquery-ui.theme.css">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script><!--D3 cdn-->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <!-- link to custom CSS, used in all html pages in the project-->
+  <link rel="stylesheet" href="static/css/styles.css">  
+</head>
+<body>
+  <!-- nav bar, code is used in all html pages-->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">Energy-AirQuality</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Facility Data</a></li>
+          <li><a href="#">State Data</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+  <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+          <div class="jumbotron text-center green">
+            <div class="banner_h1">
+              <h1>The Big Green Dashboard</h1>
+            </div>
+            <!-- <div class="banner_h2">
+              <h2>Lookin' at stuff related to electricity generation and our air quality</h2>
+            </div> -->
+          </div>      
+        </div>
+    </div>
+    <div class="row">
+      <!-- filter stuff goes in the left most column-->
+      <div class= "col-md-1">
+        <div class="filter_div">
+          <h4>Facilities Filter</h4>
+          <button class="ui-button ui-widget ui-corner-all" id="filter_reset" name="filter_reset">Reset</button>
+          <hr>
+          <label for="year_selected">Year:</label>
+          <input type="text" id="year_selected" readonly class="input_short">          
+          <div id="year_slider" style="height:100px;"></div>
+          <hr>
+            <fieldset>
+              <h4>Power Sources</h4>
+              <div class="controlgroup">
+                <p>Dirtier</p>
+                <label for="coal_filter">Coal</label>
+                <input type="checkbox" name="coal_filter" id="coal_filter" checked="checked"><br>
+                <label for="ng_filter">Natural Gas</label>
+                <input type="checkbox" name="ng_filter" id="ng_filter" checked="checked"><br>
+                <label for="nuc_filter">Nuclear</label>
+                <input type="checkbox" name="nuc_filter" id="nuc_filter" checked="checked"><br>
+                <label for="other_filter">Other</label>
+                <input type="checkbox" name="other_filter" id="other_filter" checked="checked"><br>
+                <label for="otherbio_filter">Other Biomass</label>
+                <input type="checkbox" name="otherbio_filter" id="otherbio_filter" checked="checked"><br>
+                <label for="othergas_filter">Other Gases</label>
+                <input type="checkbox" name="coal_filter" id="othergas_filter" checked="checked"><br>
+                <label for="petro_filter">Petroleum</label>
+                <input type="checkbox" name="coal_filter" id="petro_filter" checked="checked"><br>
+                <label for="wood_filter">Wood</label>
+                <input type="checkbox" name="wood_filter" id="wood_filter" checked="checked"><br>
+                <p>Greener</p>
+                <label for="geo_filter">Geothermal</label>
+                <input type="checkbox" name="geo_filter" id="geo_filter" checked="checked"><br>
+                <label for="hydro_filter">Hydroelectric</label>
+                <input type="checkbox" name="hydro_filter" id="hydro_filter" checked="checked"><br>
+                <label for="pump_filter">Pumped Storage</label>
+                <input type="checkbox" name="coal_filter" id="pump_filter" checked="checked"><br>
+                <label for="solar_filter">Solar</label>
+                <input type="checkbox" name="coal_filter" id="solar_filter" checked="checked"><br>
+                <label for="wind_filter">Wind</label>
+                <input type="checkbox" name="coal_filter" id="wind_filter" checked="checked"><br>
+              </div>
+            </fieldset>
+        </div>
+      </div>
+      <!-- div to put all the chart divs in-->
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-10">
+        <!-- this row will only contain one column, for the map-->
+        <div class="row">
+          <div class="col-md-12">
+            <!-- throw the heat map in here, #heat_map_chart-->
+            <div id="heatmap">
+            </div>
+          </div>
+        </div>
+        <!-- this row can contain smaller charts, currently setup for three (chart1, chart2, chart3)-->
+        <!-- we can change this, i'm just putting place-holders-->
+        <div class="row">
+          <div class="col-md-4">
+            <!-- put the first smaller chart here-->
+            <div id= "chart1">
+            </div>
+            <div class="col-md-4">
+            <!-- put the second smaller chart here-->
+            <div id= "chart2">
+            </div>
+            <!-- put the third smaller chart here-->
+            <div id= "chart3">
+            </div>  
+          </div>
+        </div>
+      </div>
+    </div>   
+  </div>
+  </div>
+  <div id="sysmessage_dialog" title="System Message">
+    <span id="message_text"></span>
+  </div>
+<!-- custom application javascript file, using jquery and jquery ui-->
+<script type="text/javascript" src="static/js/config.js"></script>-->
+<script src="static/js/app.js"></script>
+<script type="text/javascript" src="static/js/heatmap2.js"></script>
+<script type="text/javascript" src="static/js/leaflet-heat.js"></script>
+<script src="static/js/aqi_app2.js"></script>   
+</body>
 </html>
