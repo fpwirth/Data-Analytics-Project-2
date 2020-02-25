@@ -15,7 +15,7 @@ L.tileLayer(
   }
 ).addTo(map);
 
-d3.json('data/facility_data').then(function(response) {
+d3.json('static/js/facility_data.json').then(function(response) {
   console.log(response);
 
   var heatlayer = [];
