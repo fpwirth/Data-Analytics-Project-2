@@ -53,7 +53,3 @@ function buildplot(state,filteredstate){
 //     console.log(state);
     // buildplot(statedata,state);
 //};
-
-// function filterstates(states) {
-//   return states.state==state;
-// }
