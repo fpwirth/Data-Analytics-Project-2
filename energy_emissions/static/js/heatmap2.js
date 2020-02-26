@@ -1,35 +1,61 @@
-var map = L.map('heatmap', {
-  center: [40.7128, -74.0059],
-  zoom: 8
-});
+d3.json('static/js/facility_data.json').then(function(facilities){
+  console.log(facilities);
+  var heatlayer18=[];
+  var facility18=[];
+  var heatlayer17=[];
+  var facility17=[];
+  var heatlayer11=[];
+  var facility11=[];
+  for (var i=0;i<facilities.length;i++){
+    var location=[facilities[i].latitude,facilities[i].longitude,facilities[i].emissions_mt];
+    var marker=L.circle([facilities[i].latitude,facilities[i].longitude],{stroke:false,fillOpacity:.75,radius:facilities[i].emissions_mt/300}).bindPopup(`<h3>${facilities[i].facility_name}<hr>Greenhouse Emissions (mt): ${facilities[i].emissions_mt}</h3>`);
+    if (facilities[i].year==2018){
+      heatlayer18.push(location);
+      facility18.push(marker);}
+    if (facilities[i].year==2017){
+      heatlayer17.push(location);
+      facility17.push(marker);}
+    if (facilities[i].year==2011){
+      heatlayer11.push(location);
+      facility11.push(marker);}};
+  createmap(facility18,facility17,facility11)});
 
-// Adding tile layer
-L.tileLayer(
-  'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
-  {
-    attribution:
-      'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox.streets',
-    accessToken: API_KEY
-  }
-).addTo(map);
+  // console.log(heatlayer);
+  // var heat = L.heatLayer(heatlayer,{
+  //   radius: 5,
+  //   blur: 10
+  // }).addTo(map);
 
-d3.json('static/js/facility_data.json').then(function(response) {
-  console.log(response);
+function createmap(facility18,facility17,facility11){
 
-  var heatlayer = [];
+  var street=L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',{
+      attribution:'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom:18,
+      id:'mapbox.streets',
+      accessToken:API_KEY});
 
-  for (var i = 0; i < response.length; i++) {
-    var location = [response[i].latitude,response[i].longitude,response[i].emissions_mt];
-    if (response[i].year == 2018 & response[i].state == 'NY'){
-      if (location){
-        heatlayer.push(location);
-      }
-    }};
-  console.log(heatlayer);
-  var heat = L.heatLayer(heatlayer,{
-    radius: 5,
-    blur: 10
-  }).addTo(map);
-});
+  var dark=L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',{
+    attribution:'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom:18,
+    id:'mapbox.dark',
+    accessToken:API_KEY});
+
+  var basemaps={
+    'Street Map':street,
+    'Dark Map':dark};
+  
+  var layer18=L.layerGroup(facility18);
+  var layer17=L.layerGroup(facility17);
+  var layer11=L.layerGroup(facility11);
+
+  var overlaymaps={
+    '2018 Facilities':layer18,
+    '2017 Facilities':layer17,
+    '2011 Facilities':layer11};
+
+  var map=L.map('heatmap',{
+    center:[40.7128,-74.0059],
+    zoom:8,
+    layers:[street,layer18]});
+
+  L.control.layers(basemaps,overlaymaps,{collapsed:false}).addTo(map);};
