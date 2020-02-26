@@ -27,7 +27,7 @@ function testF(event){
 }
 
 
-document.getElementsByName("year_selector")[0].addEventListener('change', aqiPlot);
+document.getElementsByName("year_selected")[0].addEventListener('change', aqiPlot);
 
 
 function aqiPlot(){
