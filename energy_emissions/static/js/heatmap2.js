@@ -1,4 +1,4 @@
-d3.json('static/js/facility_data.json').then(function(facilities){
+d3.json('static/data/facility_data.json').then(function(facilities){
   console.log(facilities);
   var heatlayer18=[];
   var facility18=[];
