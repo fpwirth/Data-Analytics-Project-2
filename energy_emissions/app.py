@@ -52,11 +52,6 @@ def facilitydata():
 @app.route("/data/state_data")
 def statedata():
     """Return information related to state data"""
-    return state_data.to_json()
-
-@app.route("/data/state_records")
-def staterecords():
-    """Return information related to state records"""
     return state_data.to_json(orient='records')
 
 if __name__ == '__main__':
