@@ -17,6 +17,7 @@ The focus of this project is looking at electricity generation and emissions to 
 |7.     |Run the notebook "import_data.ipynb", this will import the csv's, the outputs of the previous notebooks, and some additional metadata found in the raw-data folder|
 |8.     |Open the site and enjoy!                                                                           |
 |9.     |Run the views script "views.sql", this will create all of the views that will be used to chart data.  Also has a data fix for facility|
+|10.    |Run the update_nulls.sql query, this will update some of the null values in the state data table|
 
 ### Link to Site
 [Energy and Clean Air Analysis Dashboard](https://fpwirth.github.io/Data-Analytics-Project-2/)
