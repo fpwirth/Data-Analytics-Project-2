@@ -27,127 +27,77 @@
   <link rel="stylesheet" href="static/css/styles.css">  
 </head>
 <body>
-  <!-- nav bar, code is used in all html pages-->
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="index.html">Energy-AirQuality</a>
+<div class="container">
+  <div class="row">
+      <div class="col-md-12">
+        <div class="jumbotron text-center green">
+          <div class="banner_h1">
+            <h1>The Big Green Dashboard</h1>
+            <h4>How we generate power affects our air</h4>
+          </div>
+        </div>      
       </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Facility Data</a></li>
-          <li><a href="#">State Data</a></li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-  <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-          <div class="jumbotron text-center green">
-            <div class="banner_h1">
-              <h1>The Big Green Dashboard</h1>
-            </div>
-            <!-- <div class="banner_h2">
-              <h2>Lookin' at stuff related to electricity generation and our air quality</h2>
-            </div> -->
-          </div>      
-        </div>
-    </div>
-    <div class="row">
-      <!-- filter stuff goes in the left most column-->
-      <div class= "col-md-1">
-        <div class="filter_div">
-          <h4>Facilities Filter</h4>
-          <button class="ui-button ui-widget ui-corner-all" id="filter_reset" name="filter_reset">Reset</button>
-          <hr>
-          <label for="year_selected">Year:</label>
-          <input type="text" id="year_selected" readonly class="input_short">          
-          <div id="year_slider" style="height:100px;"></div>
-          <hr>
-            <fieldset>
-              <h4>Power Sources</h4>
-              <div class="controlgroup">
-                <p>Dirtier</p>
-                <label for="coal_filter">Coal</label>
-                <input type="checkbox" name="coal_filter" id="coal_filter" checked="checked"><br>
-                <label for="ng_filter">Natural Gas</label>
-                <input type="checkbox" name="ng_filter" id="ng_filter" checked="checked"><br>
-                <label for="nuc_filter">Nuclear</label>
-                <input type="checkbox" name="nuc_filter" id="nuc_filter" checked="checked"><br>
-                <label for="other_filter">Other</label>
-                <input type="checkbox" name="other_filter" id="other_filter" checked="checked"><br>
-                <label for="otherbio_filter">Other Biomass</label>
-                <input type="checkbox" name="otherbio_filter" id="otherbio_filter" checked="checked"><br>
-                <label for="othergas_filter">Other Gases</label>
-                <input type="checkbox" name="coal_filter" id="othergas_filter" checked="checked"><br>
-                <label for="petro_filter">Petroleum</label>
-                <input type="checkbox" name="coal_filter" id="petro_filter" checked="checked"><br>
-                <label for="wood_filter">Wood</label>
-                <input type="checkbox" name="wood_filter" id="wood_filter" checked="checked"><br>
-                <p>Greener</p>
-                <label for="geo_filter">Geothermal</label>
-                <input type="checkbox" name="geo_filter" id="geo_filter" checked="checked"><br>
-                <label for="hydro_filter">Hydroelectric</label>
-                <input type="checkbox" name="hydro_filter" id="hydro_filter" checked="checked"><br>
-                <label for="pump_filter">Pumped Storage</label>
-                <input type="checkbox" name="coal_filter" id="pump_filter" checked="checked"><br>
-                <label for="solar_filter">Solar</label>
-                <input type="checkbox" name="coal_filter" id="solar_filter" checked="checked"><br>
-                <label for="wind_filter">Wind</label>
-                <input type="checkbox" name="coal_filter" id="wind_filter" checked="checked"><br>
-              </div>
-            </fieldset>
-        </div>
-      </div>
-      <!-- div to put all the chart divs in-->
-      <div class="col-md-1">
-      </div>
-      <div class="col-md-10">
-        <!-- this row will only contain one column, for the map-->
+  </div>
+  <!-- row for filter -->
+  <div class="row" id="filter_row">
+    <div class="col-md-12">
+      <div class="filter_div">
         <div class="row">
           <div class="col-md-12">
-            <!-- throw the heat map in here, #heat_map_chart-->
-            <div id="heatmap">
-            </div>
+            <h4>Interactive Filter</h4>
           </div>
         </div>
-        <!-- this row can contain smaller charts, currently setup for three (chart1, chart2, chart3)-->
-        <!-- we can change this, i'm just putting place-holders-->
         <div class="row">
+          <div class="col-md-5">
+            <div id="year_slider" style="height:10px; width:85%;">Year</div>
+          </div>
+          <div class="col-md-3">
+            <label for="year_selected">Selected: </label>
+            <input type="text" id="year_selected" name="year_selected" readonly class="input_short">    
+          </div>
           <div class="col-md-4">
-            <!-- put the first smaller chart here-->
-            <div id= "chart1">
-            </div>
-            <div class="col-md-4">
-            <!-- put the second smaller chart here-->
-            <div id= "chart2">
-            </div>
-            <!-- put the third smaller chart here-->
-            <div id= "chart3">
-            </div>  
+            <label for="state_selected">State: </label>        
+            <select id="state_selected" name="state_selected">
+            </select>  
           </div>
         </div>
+      </div>              
+    </div>
+  </div>        
+  <!-- heat map row-->
+  <div class="row" id="heatmap_row">
+    <div class = "col-md-12">
+      <!-- throw the heat map in here, #heat_map_chart-->
+      <div id="heatmap">
       </div>
-    </div>   
+    </div>
   </div>
+  <!-- other charts (2)-->
+  <div class="row" id="other_row">
+    <div class = "col-md=6 col-sm-12">
+      <!-- put the first smaller chart here-->
+      <div id= "chart1">
+        <form>
+          <label><input type="radio" name="mode" value="grouped"> Grouped</label>
+          <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
+        </form>
+      </div>        
+    </div>
+    <div class = "col-md=6 col-sm-12">
+      <!-- put the second smaller chart here-->
+      <div id= "chart2">
+      </div>        
+    </div>
   </div>
   <div id="sysmessage_dialog" title="System Message">
     <span id="message_text"></span>
   </div>
+</div>
 <!-- custom application javascript file, using jquery and jquery ui-->
 <script type="text/javascript" src="static/js/config.js"></script>-->
 <script src="static/js/app.js"></script>
 <script type="text/javascript" src="static/js/heatmap.js"></script>
 <script type="text/javascript" src="static/js/leaflet-heat.js"></script>
-<script src="static/js/aqi_app.js"></script>   
+<script src="static/js/aqi_app2.js"></script>   
 </body>
 </html>
