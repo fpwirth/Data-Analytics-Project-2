@@ -21,3 +21,6 @@ facility_data = pd.read_sql_query('select * from "facility_emissions_by_year"',c
 state_list.to_json('static/data/state_list.json')
 state_data.to_json('static/data/state_data.json',orient='records')
 facility_data.to_json('static/data/facility_data.json',orient='records')
+
+#All done!
+print('ALL DONE!')
