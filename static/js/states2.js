@@ -1,4 +1,4 @@
-d3.json('static/js/state_records_test.json').then(function(states){
+d3.json('static/data/state_data.json').then(function(states){
   var state='TX';
   var filteredstate=states.filter(states=>states.state=='TX');
   console.log(filteredstate);
