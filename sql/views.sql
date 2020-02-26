@@ -15,12 +15,6 @@ DROP VIEW IF EXISTS state_list;
 DROP VIEW IF EXISTS state_data_by_year;
 DROP VIEW IF EXISTS state_aqi_pct_change;
 
-  --fixing missing facility id for a facility in Texas with no lat and long
-  UPDATE facility
-     SET latitude = 29.487663,
-	 	 longitude = -94.983031
-   WHERE facility_id = '1012447';
-   
 -- create views for analysis, charting, drop-down lists, pop-ups and...fun
 
 -- state list (for drop downs, and metadata for pop-ups)
@@ -374,7 +368,7 @@ AS
 		 saqby.good_days_percent,
 		 saqby.bad_days_percent,
 		 std.generation_mwh AS generation_mwh_total,
-		 sge.greenhouse_emissions,
+		 COALESCE(sge.greenhouse_emissions,0) AS greenhouse_emissions,
 		 rdd.heating_degree_days,
 		 rdd.cooling_degree_days,
 		 std.co2_mt AS co2_mt_total,
@@ -412,10 +406,10 @@ AS
 		 sgd.co2_mt AS co2_mt_other_geothermal,
 		 sgd.so2_mt AS so2_mt_other_geothermal,
 		 sgd.nox_mt AS nox_mt_other_geothermal,	
-		 swwd.generation_mwh AS generation_mwh_wood,
-		 swwd.co2_mt AS co2_mt_wood,
-		 swwd.so2_mt AS so2_mt_wood,
-		 swwd.nox_mt AS nox_mt_wood,		 
+		 swwd.generation_mwh AS generation_mwh_wind_wood,
+		 swwd.co2_mt AS co2_mt_other_wind_wood,
+		 swwd.so2_mt AS so2_mt_other_wind_wood,
+		 swwd.nox_mt AS nox_mt_other_wind_wood,		 
 		 sncd.generation_mwh AS generation_mwh_nuclear,
 		 spd.generation_mwh AS generation_mwh_pumped,
 		 ssd.generation_mwh AS generation_mwh_solar,
