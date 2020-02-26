@@ -13,26 +13,34 @@ var margin = {top: 40, right: 10, bottom: 20, left: 35},
 var formatPercent = d3.format(".0%");
 var formatNumber = d3.format("");
 
-var svg = d3
-    .select("#chart1")
-    .append("svg")
-    .attr("height", svgHeight)
-    .attr("width", svgWidth)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var formatPercent = d3.format(".0%");
 var formatNumber = d3.format("");
         
 var url = "static/js/state_records_test.json"
+var filterYear = d3.select('#year_selected');
+console.log(filterYear);
+console.log("LOURDES!");
+
+function testF(event){
+    console.log("HELLO")
+}
+
+
+document.getElementsByName("year_selector")[0].addEventListener('change', aqiPlot);
+
+
+function aqiPlot(){
+
 
 
 d3.json(url).then(function(data){
     var aqiData = data
     console.log(aqiData)
-
+    var inputYear = filterYear.property('value')
+    console.log(inputYear)
      // Filter the data to keep only records for the chosen year
-    var filteredData = aqiData.filter(aqiData => aqiData.year === 1995);
+    var filteredData = aqiData.filter(aqiData => aqiData.year == inputYear);
     
     var summaryData = filteredData.map(function(d){
         return {
@@ -46,6 +54,23 @@ d3.json(url).then(function(data){
     var states = summaryData.map(d => d.state)
    
     console.log(states)
+    var svgArea = d3
+    .select("#heatmap")
+    .select("svg")
+
+
+    if (!svgArea.empty()){
+        svgArea.remove();
+    }
+
+    
+    var svg = d3.select("#heatmap").append('svg')
+    .attr("height", svgHeight)
+    .attr("width", svgWidth)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    // var keys = [0,1]
     var keys = ['good_days_percent', 'bad_days_percent']
     var keysLabel = ['Air Quality Index: Good', 'Air Quality Index: Bad']
     var stack = d3.stack()
@@ -65,6 +90,9 @@ d3.json(url).then(function(data){
         .rangeRound([0, width])
         .padding(0.1)
         .align(0.1);
+
+    var x1 = d3.scaleBand()
+        .padding(0.05);
 
     var y = d3.scaleLinear()
         .domain([0, yStackMax])
@@ -170,11 +198,11 @@ d3.json(url).then(function(data){
 
     function transitionGrouped() {
         y.domain([0, yGroupMax]);
-        
+        console.log(this);
         rect.transition()
             .duration(500)
             .delay(function(d, i) { return i * 10; })
-            .attr("x", function(d, i, j) { return x(i) + x.bandwidth() / n * parseInt(this.parentNode.id); })
+            .attr("x", function(d, i, j) { return x(i) + x.bandwidth() / n * keys.indexOf(this.parentNode.id) })
             .attr("width", x.bandwidth() / n)
         .transition()
             .attr("y", function(d) { return height - (y(d[0]) - y(d[1])); })
@@ -209,3 +237,9 @@ d3.json(url).then(function(data){
 
 
 });
+
+}
+
+
+
+// aqiPlot();
