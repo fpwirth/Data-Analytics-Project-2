@@ -26,7 +26,7 @@ var facility17=[];
 var heatlayer11=[];
 var facility11=[];
 
-d3.json('static/js/facility_data.json').then(function(facilities){
+d3.json('data/facility_data').then(function(facilities){
   console.log(facilities);
   for (var i=0;i<facilities.length;i++){
     var location=[facilities[i].latitude,facilities[i].longitude,facilities[i].emissions_mt];
