@@ -41,18 +41,16 @@ h4 {
 
 .green {
   position: relative;
-  height: 200px;
+  height: 150px;
   padding-top: 1px;
   margin-top: 100px;
   /* padding: 20px; */
   margin: 0;
   background: black;
   background-image: url("../images/banner_background.jpg");
-  /* background-repeat: no-repeat; */
-  /* background-image: url("../images/banner.png"); */
   background-attachment: fixed;
   background-position: bottom center;
-  background-size: auto 203px;;
+  background-size: auto 150px;;
 }
 
 .banner_h1 {
@@ -61,6 +59,7 @@ h4 {
   background-image: linear-gradient(lightblue, lightgreen);
   width: 100%;
   border-radius: 25px;
+  /* height: 300px; */
 
 }
 

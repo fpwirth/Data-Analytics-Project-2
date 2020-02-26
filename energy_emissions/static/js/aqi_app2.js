@@ -23,30 +23,31 @@ var svg = d3
 var formatPercent = d3.format(".0%");
 var formatNumber = d3.format("");
         
-var url = "static/js/state_records_test.json"
+// var url = "static/js/state_records_test.json"
+var url = "data/state_data/"
 
+// d3.json('https://localhost:5000/data/state_data').then(function(data){
+// // d3.json(url).then(function(data){
+//     var aqiData = data
+//     console.log(aqiData)
 
-d3.json(url).then(function(data){
-    var aqiData = data
-    console.log(aqiData)
-
-     // Filter the data to keep only records for the chosen year
-    var filteredData = aqiData.filter(aqiData => aqiData.year === 1995);
+//      // Filter the data to keep only records for the chosen year
+//     var filteredData = aqiData.filter(aqiData => aqiData.year === 1995);
     
-    var summaryData = filteredData.map(function(d){
-        return {
-            year: d.year,
-            good_days_percent: d.good_days_percent,
-            bad_days_percent: d.bad_days_percent,
-            state: d.state
-        }
-    })
+//     var summaryData = filteredData.map(function(d){
+//         return {
+//             year: d.year,
+//             good_days_percent: d.good_days_percent,
+//             bad_days_percent: d.bad_days_percent,
+//             state: d.state
+//         }
+//     })
     
    
-    console.log(summaryData)
+    // console.log(summaryData)
 
-    var keys = summaryData.map(states => states.state)
-    console.log(keys)
+    // var keys = summaryData.map(states => states.state)
+    // console.log(keys)
 
     // var layers = stack
     //     .keys(summaryData.state)
@@ -168,4 +169,4 @@ d3.json(url).then(function(data){
 //         }
 
 
-});
+// });
