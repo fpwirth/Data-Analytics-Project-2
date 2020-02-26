@@ -13,20 +13,26 @@ var margin = {top: 40, right: 10, bottom: 20, left: 35},
 var formatPercent = d3.format(".0%");
 var formatNumber = d3.format("");
 
-var svg = d3
-    .select("#chart1")
-    .append("svg")
-    .attr("height", svgHeight)
-    .attr("width", svgWidth)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var formatPercent = d3.format(".0%");
 var formatNumber = d3.format("");
         
 var url = "static/js/state_records_test.json"
-var filterYear = d3.select('#year_selected')
-console.log(filterYear)
+var filterYear = d3.select('#year_selected');
+console.log(filterYear);
+console.log("LOURDES!");
+
+function testF(event){
+    console.log("HELLO")
+}
+
+
+document.getElementsByName("year_selector")[0].addEventListener('change', aqiPlot);
+
+
+function aqiPlot(){
+
+
 
 d3.json(url).then(function(data){
     var aqiData = data
@@ -48,6 +54,22 @@ d3.json(url).then(function(data){
     var states = summaryData.map(d => d.state)
    
     console.log(states)
+    var svgArea = d3
+    .select("#heatmap")
+    .select("svg")
+
+
+    if (!svgArea.empty()){
+        svgArea.remove();
+    }
+
+    
+    var svg = d3.select("#heatmap").append('svg')
+    .attr("height", svgHeight)
+    .attr("width", svgWidth)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
     // var keys = [0,1]
     var keys = ['good_days_percent', 'bad_days_percent']
     var keysLabel = ['Air Quality Index: Good', 'Air Quality Index: Bad']
@@ -215,3 +237,9 @@ d3.json(url).then(function(data){
 
 
 });
+
+}
+
+
+
+// aqiPlot();
