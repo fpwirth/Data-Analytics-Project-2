@@ -1,12 +1,13 @@
 d3.json('static/js/state_records_test.json').then(function(states){
-  var statesdata=states;
-  var filteredstate=statesdata.filter(statesdata=>statesdata.state=='TX');
+  var state='TX';
+  var filteredstate=states.filter(states=>states.state=='TX');
   console.log(filteredstate);
-  buildplot(filteredstate);
+  buildplot(state,filteredstate);
 });
 
-function buildplot(filteredstate){
+function buildplot(state,filteredstate){
   var years=filteredstate.map(year=>year.year);
+  var greenhousevalues=filteredstate.map(year=>year.greenhouse_emissions);
   var ngvalues=filteredstate.map(year=>year.generation_mwh_ng);
   var coalvalues=filteredstate.map(year=>year.generation_mwh_coal);
   var petrovalues=filteredstate.map(year=>year.generation_mwh_petro);
@@ -20,23 +21,30 @@ function buildplot(filteredstate){
   var woodvalues=filteredstate.map(year=>year.generation_mwh_wood);
   var otherbiomassvalues=filteredstate.map(year=>year.generation_mwh_other_biomass);
   var pumpedvalues=filteredstate.map(year=>year.generation_mwh_pumped);
-  console.log(years);
-    var traces=[
-      {x:years,y:coalvalues,stackgroup:'one',groupnorm:'percent'},
-      {x:years,y:ngvalues,stackgroup:'one'},
-      {x:years,y:petrovalues,stackgroup:'one'},
-      {x:years,y:othergasvalues,stackgroup:'one'},
-      {x:years,y:othervalues,stackgroup:'one'},
-      {x:years,y:nuclearvalues,stackgroup:'one'},
-      {x:years,y:hydrovalues,stackgroup:'one'},
-      {x:years,y:solarvalues,stackgroup:'one'},
-      {x:years,y:windvalues,stackgroup:'one'},
-      {x:years,y:geothermalvalues,stackgroup:'one'},
-      {x:years,y:woodvalues,stackgroup:'one'},
-      {x:years,y:otherbiomassvalues,stackgroup:'one'},
-      {x:years,y:pumpedvalues,stackgroup:'one'}];
+  var greenvalues=filteredstate.map(year=>year.generation_mwh_solar+year.generation_mwh_hydro+year.generation_mwh_wind+year.generation_mwh_nuclear+year.generation_mwh_pumped);
+  console.log(greenvalues);
+  var traces=[
+    {x:years,y:coalvalues,name:'Coal',stackgroup:'one',groupnorm:'percent'},
+    {x:years,y:ngvalues,name:'Natural Gas',stackgroup:'one'},
+    {x:years,y:petrovalues,name:'Petroleum',stackgroup:'one'},
+    {x:years,y:othergasvalues,name:'Other Gases',stackgroup:'one'},
+    {x:years,y:othervalues,name:'Other',stackgroup:'one'},
+    {x:years,y:nuclearvalues,name:'Nuclear',stackgroup:'one'},
+    {x:years,y:hydrovalues,name:'Hydro',stackgroup:'one'},
+    {x:years,y:solarvalues,name:'Solar',stackgroup:'one'},
+    {x:years,y:windvalues,name:'Wind',stackgroup:'one'},
+    {x:years,y:geothermalvalues,name:'Geothermal',stackgroup:'one'},
+    {x:years,y:woodvalues,name:'Wood',stackgroup:'one'},
+    {x:years,y:otherbiomassvalues,name:'Other Biomass',stackgroup:'one'},
+    {x:years,y:pumpedvalues,name:'Pumped Storage',stackgroup:'one'},
+    {x:years,y:greenhousevalues,name:'Greenhouse Emissions',yaxis:'y2',type:'scatter'}];
+  var layout={
+    title: `${state} Power Generation by Type`,
+    yaxis:{title: 'Generation (MWh)'},
+    yaxis2:{title: 'Greenhouse Emissions (metric tons of carbon dioxide)',overlaying:'y',side:'right'},
+    legend:{font:{size:4},orientation:'h'}};
 
-    Plotly.newPlot('chart2', traces, {title: 'State Power Generation by Type'});
+    Plotly.newPlot('chart2',traces,layout);
   };
 
 // function optionChanged(){
