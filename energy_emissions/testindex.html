@@ -49,7 +49,7 @@
           </div>
           <div class="row">
             <div class="col-md-5">
-              <div id="year_slider" name="year_slider" style="height:10px; width:85%;">Year</div>
+              <div id="year_slider" name="year_slider" style="height:10px; width:85%;"><label>Year</label></div>
             </div>
             <div class="col-md-3">
               <label for="year_selected">Selected: </label>
@@ -57,21 +57,13 @@
             </div>
             <div class="col-md-4">
               <label for="state_selected">State: </label>        
-              <select id="state_selected" name="state_selected">
+              <select id="state_selected" name="state_selected" size="1">
               </select>  
             </div>
           </div>
         </div>              
       </div>
     </div>        
-    <!-- heat map row-->
-    <div class="row" id="heatmap_row">
-      <div class = "col-md-12">
-        <!-- throw the heat map in here, #heat_map_chart-->
-        <div id="heatmap">
-        </div>
-      </div>
-    </div>
     <!-- other charts (2)-->
     <div class="row" id="other_row">
       <div class = "col-md=6 col-sm-12">
@@ -89,6 +81,14 @@
         </div>        
       </div>
     </div>
+    <!-- heat map row-->
+    <div class="row" id="heatmap_row">
+      <div class = "col-md-12">
+        <!-- throw the heat map in here, #heat_map_chart-->
+        <div id="heatmap">
+        </div>
+      </div>
+    </div>    
   <div id="sysmessage_dialog" title="System Message">
     <span id="message_text"></span>
   </div>
