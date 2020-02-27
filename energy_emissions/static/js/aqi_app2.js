@@ -1,19 +1,19 @@
 function d3init(){
     var aqiyear=2018;
     aqiPlot(aqiyear)}
-
+// varibles to set the number of variables (n) and the number of states (m) and the d3.stack function to stack the bar chart
 var n = 2;
-var m = 51;
+var m = 52;
 var stack = d3.stack();
-
-var svgWidth = 500;
-var svgHeight = 300;
+// setup the svg canvas
+var svgWidth = 800;
+var svgHeight = 150;
 var padding = 700;
-
-var margin = {top: 40, right: 10, bottom: 20, left: 35},
+// setup chart margin
+var margin = {top: 5, right: 5, bottom: 20, left: 35},
     width = svgWidth - margin.left - margin.right,
     height = svgHeight - margin.top - margin.bottom;
-
+//format por the labels in the plot
 var formatPercent = d3.format("%");
 var formatNumber = d3.format("");
 // console.log(filterYear);
@@ -29,7 +29,7 @@ var formatNumber = d3.format("");
 function aqiPlot(aqiyear){
 
 
-
+// get the json file
 d3.json('static/data/state_data.json').then(function(data){
     var aqiData = data
     console.log(aqiData)
@@ -37,7 +37,7 @@ d3.json('static/data/state_data.json').then(function(data){
     console.log(inputYear)
          // Filter the data to keep only records for the chosen year
     var filteredData = aqiData.filter(aqiData => aqiData.year == inputYear);
-    
+    //
     var summaryData = filteredData.map(function(d){
         return {
             year: d.year,
@@ -46,12 +46,12 @@ d3.json('static/data/state_data.json').then(function(data){
             state: d.state
         }
     })
-    
+    // get the states as a variable to use in the tick label and more
     var states = summaryData.map(d => d.state)
    
     console.log(states)
     var svgArea = d3
-    .select("#chart1")
+    .select("#heatmap")
     .select("svg")
 
 
@@ -59,8 +59,8 @@ d3.json('static/data/state_data.json').then(function(data){
         svgArea.remove();
     }
 
-    
-    var svg = d3.select("#chart1").append('svg')
+    //select where the plot will be located in the body of the html
+    var svg = d3.select("#heatmap").append('svg')
     .attr("height", svgHeight)
     .attr("width", svgWidth)
     .append("g")
@@ -68,7 +68,7 @@ d3.json('static/data/state_data.json').then(function(data){
 
     // var keys = [0,1]
     var keys = ['good_days_percent', 'bad_days_percent']
-    var keysLabel = ['Air Quality Index: Good', 'Air Quality Index: Bad']
+    var keysLabel = ['Good', 'Bad']
     var stack = d3.stack()
         .keys(keys)
         .order(d3.stackOrderDescending);
@@ -77,10 +77,10 @@ d3.json('static/data/state_data.json').then(function(data){
 
     console.log(stackedSeries)
 
-//     
+//  // plot range   
     yStackMax = d3.max(stackedSeries, function(layer) { return d3.max(layer, function(d) { return d[1]; }); }),
     yGroupMax = d3.max(stackedSeries, function(layer) { return d3.max(layer, function(d) { return d[1] - d[0]; }); });
-
+// setting up the axis
     var x = d3.scaleBand()
         .domain(d3.range(m))
         .rangeRound([0, width])
@@ -100,8 +100,14 @@ d3.json('static/data/state_data.json').then(function(data){
 
     var xAxis = d3.axisBottom()
         .scale(x)
-        .tickSize(0)
+        .tickSize(2)
         .tickPadding(6)
+        .ticks(m)
+        .tickFormat(function (d){
+            return states[d]
+        });
+        // .style("font", "14px")
+        // .outerTickSize()
         
     var yAxis = d3.axisLeft()
         .scale(y)
@@ -133,6 +139,7 @@ d3.json('static/data/state_data.json').then(function(data){
     svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
+        .style("font", "8px times")
         .call(xAxis);
     
     svg.append("g")
@@ -146,7 +153,10 @@ d3.json('static/data/state_data.json').then(function(data){
 
     var legend = svg.append('g')
                 .attr('class', 'legend')
-                .attr('transform', 'translate(' + (padding + 50) + ', 0)');
+                .attr('transform', 'translate(' + (padding + 20) + ', 0)')
+                .style("font-size", "10px")
+                .attr("height", 300)
+                .attr("width", 300)
 
             legend.selectAll('rect')
                 .data(keysLabel)
@@ -157,7 +167,7 @@ d3.json('static/data/state_data.json').then(function(data){
                     return i * 18;
                 })
                 .attr('width', 12)
-                .attr('height', 12)
+                .attr('height',12)
                 .attr('fill', function(d, i){
                     return color(i);
                 });
@@ -183,7 +193,7 @@ d3.json('static/data/state_data.json').then(function(data){
         // setTimeout(function() {
         //     d3.select("input[value=\"percent\"]").property("checked", true).each(change);
         // }, 2000);
-    }, 2000);
+    }, 200);
 
 
     function change() {
