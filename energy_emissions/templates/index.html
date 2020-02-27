@@ -58,37 +58,37 @@
             <div class="col-md-4">
               <label for="state_selected">State: </label>        
               <select id="state_selected" name="state_selected" size="1">
-              </select>  
+              </select>
             </div>
           </div>
-        </div>              
+        </div>
       </div>
-    </div>        
+    </div>
     <!-- other charts (2)-->
     <div class="row" id="other_row">
-      <div class = "col-md=6 col-sm-12">
+      <div class = "col-md=6 col-sm-12" id='aqidiv'>
         <!-- put the first smaller chart here-->
         <div id= "chart1">
           <form>
             <label><input type="radio" name="mode" value="grouped"> Grouped</label>
             <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
           </form>
-        </div>        
+        </div>
       </div>
       <div class = "col-md=6 col-sm-12">
         <!-- put the second smaller chart here-->
         <div id= "chart2">
-        </div>        
+        </div>
       </div>
     </div>
     <!-- heat map row-->
     <div class="row" id="heatmap_row">
-      <div class = "col-md-12">
+      <div class = "col-md-12" id='heatmapdiv'>
         <!-- throw the heat map in here, #heat_map_chart-->
         <div id="heatmap">
         </div>
       </div>
-    </div>    
+    </div>
   <div id="sysmessage_dialog" title="System Message">
     <span id="message_text"></span>
   </div>
@@ -96,9 +96,9 @@
 <!-- custom application javascript file, using jquery and jquery ui-->
 <script type="text/javascript" src="static/js/config.js"></script>
 <script type="text/javascript" src="static/js/app.js"></script>
-<script type="text/javascript" src="static/js/heatmap2.js"></script>
+<script type="text/javascript" src="static/js/heatmap.js"></script>
 <script type="text/javascript" src="static/js/leaflet-heat.js"></script>
 <script type="text/javascript" src="static/js/aqi_app.js"></script>
-<script type="text/javascript" src="static/js/states2.js"></script>
+<script type="text/javascript" src="static/js/states.js"></script>
 </body>
 </html>

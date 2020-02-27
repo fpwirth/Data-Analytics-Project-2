@@ -1,6 +1,9 @@
 function d3init(){
     var aqiyear=2018;
     aqiPlot(aqiyear)}
+
+
+function aqiPlot(aqiyear){
 // varibles to set the number of variables (n) and the number of states (m) and the d3.stack function to stack the bar chart
 var n = 2;
 var m = 52;
@@ -26,7 +29,6 @@ var formatNumber = d3.format("");
 
 // document.getElementById("year_selected")[0].addEventListener('change', aqiPlot);
 
-function aqiPlot(aqiyear){
 
 
 // get the json file
@@ -147,8 +149,15 @@ d3.json('static/data/state_data.json').then(function(data){
         .attr("transform", "translate(" + 0 + ",0)")
         .style("font-size", "10px")
         .call(yAxis);
-    
-    d3.selectAll("input").on("change", change);
+
+
+    function aqichange() {
+        clearTimeout(timeout);
+        if (this.value === "grouped") transitionGrouped();
+        else if (this.value === "stacked") transitionStacked();
+    }
+
+    d3.selectAll("input").on("change", aqichange);
 
 
     var legend = svg.append('g')
@@ -186,21 +195,16 @@ d3.json('static/data/state_data.json').then(function(data){
                 .attr('text-anchor', 'start')
                 .attr('alignment-baseline', 'hanging');
 
-
     
     var timeout = setTimeout(function() {
-        d3.select("input[value=\"grouped\"]").property("checked", true).each(change);
+        d3.select("input[value=\"grouped\"]").property("checked", true).each(aqichange);
         // setTimeout(function() {
         //     d3.select("input[value=\"percent\"]").property("checked", true).each(change);
         // }, 2000);
     }, 200);
 
 
-    function change() {
-        clearTimeout(timeout);
-        if (this.value === "grouped") transitionGrouped();
-        else if (this.value === "stacked") transitionStacked();
-    }    
+
 
     function transitionGrouped() {
         y.domain([0, yGroupMax]);
@@ -244,15 +248,19 @@ d3.json('static/data/state_data.json').then(function(data){
 
 });
 
-}
+};
 
+d3init();
 
 d3.select('#year_slider').on('click',changeaqi);
 //document.getElementById("year_selected")[0].addEventListener('change', changeaqi);
 
-d3init();
+
 
 function changeaqi(){
     let aqiyear=d3.select("#year_selected").property('value');
+    console.log('all good');
+    d3.select('#aqidiv').html('');
+    d3.select('#aqidiv').html('<div id= "chart1"><form><label><input type="radio" name="mode" value="grouped"> Grouped</label><label><input type="radio" name="mode" value="stacked" checked> Stacked</label></form></div>');
     aqiPlot(aqiyear)
 }
