@@ -7,11 +7,7 @@ function plotlyinit(){
 
 //Function to build state plots
 function buildplot(stateplot){
-<<<<<<< HEAD
   //Get data and filter by state
-=======
-  // console.log(stateplot);
->>>>>>> 7c27d2859cc2255ac80a6947c4fce3b84723721f
   d3.json('static/data/state_data.json').then(function(states){
     var state=stateplot;
     var filteredstate=states.filter(states=>states.state==state);
