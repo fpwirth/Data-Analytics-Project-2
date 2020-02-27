@@ -446,9 +446,9 @@ AS
 	  ON s.state = swwd.state 
 	 AND std.year = swwd.year LEFT OUTER JOIN state_greenhouse_emissions sge
 	  ON s.state = sge.state
-	 AND std.year = sge.year INNER JOIN region_degree_days rdd
+	 AND std.year = sge.year LEFT OUTER JOIN region_degree_days rdd
 	  ON r.region = rdd.region
-	 AND std.year = rdd.year INNER JOIN state_air_quality_by_year saqby
+	 AND std.year = rdd.year LEFT OUTER JOIN state_air_quality_by_year saqby
 	  ON s.state = saqby.state
 	 AND std.year = saqby.year;
 
