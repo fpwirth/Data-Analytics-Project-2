@@ -16,6 +16,9 @@ DROP VIEW IF EXISTS state_data_by_year;
 DROP VIEW IF EXISTS state_aqi_pct_change;
 
 -- data fix for air_quality
+  -- just in case the data is already loaded
+  DELETE FROM air_quality WHERE state = 'US';
+  
   -- adding a total row for 'US'
   INSERT INTO air_quality
   		(
