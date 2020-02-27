@@ -2,21 +2,27 @@
 var filter_year = d3.select('#year_selected');
 
 // on change call function
-filter_year.on('change', function(){
+d3.select('#year_selected').on('click', function(){
 
+  console.log('hello')
   var yr = filter_year.property('value');
   console.log(yr)
+  // reset the plot
+  d3.select('#heatmap').html('')
   plotMap(yr);
 
 });
 
 function plotMap(yr){
 
+  d3.select('#heatmap').html('')
   // console.log('testing');
 
   d3.json('static/data/facility_data.json').then(function(facilities){
     // console.log(facilities);
     // var year_input = filter_year.property('value');
+
+    // console.log(filter_year.property('value'));
 
     var heatlayer18=[];
     var facility18=[];
@@ -62,9 +68,10 @@ function plotMap(yr){
     var layer11=L.layerGroup(facility11);
 
     var overlaymaps={
-      '2018 Facilities':layer18,
-      'Filtered Facilities' :layerfilter,
-      '2011 Facilities':layer11};
+      // '2018 Facilities':layer18,
+      'Filtered Facilities' :layerfilter//,
+      // '2011 Facilities':layer11};
+    }
 
     var map=L.map('heatmap',{
       center:[40.7128,-74.0059],
@@ -73,6 +80,7 @@ function plotMap(yr){
 
       L.control.layers(basemaps,overlaymaps,{collapsed:false}).addTo(map);
     };
+
   }
 
   plotMap();
