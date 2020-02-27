@@ -75,7 +75,7 @@ $( document ).ready(function() {
     $state_selected.append(new Option('Puerto Rico','PR')); 
     $state_selected.append(new Option('United States (Total)','US')); 
     
-
+    $state_selected.val('TX')
     // drop down list for state
     // var stateURL = "data/state_list";
     // $.getJSON( stateURL, {
@@ -111,13 +111,4 @@ $( document ).ready(function() {
     // span for message text
     var $message_text = $('#message_text');
 
-    // filter reset button (sets options back to default)
-    var $filter_reset = $('#filter_reset').button().click(function(d) {
-
-        // set the message an open the dialog
-        $message_text.text('Under construction, not ready yet!')
-
-        // open the dialog
-        $sysmessage_dialog.dialog('open');
-    })
 });
