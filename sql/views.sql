@@ -374,7 +374,7 @@ AS
 			FROM state_data sd
 		   WHERE sd.energy_source = 'Wind'		   
 	   ),	   
-		 state_wind_wood_data
+		 state_wood_data
 	  AS
 	   (
 		  SELECT sd.state,
@@ -459,10 +459,10 @@ AS
 		 COALESCE(sgd.co2_mt,0) AS co2_mt_other_geothermal,
 		 COALESCE(sgd.so2_mt,0) AS so2_mt_other_geothermal,
 		 COALESCE(sgd.nox_mt,0) AS nox_mt_other_geothermal,	
-		 COALESCE(swwd.generation_mwh,0) AS generation_mwh_wind_wood,
-		 COALESCE(swwd.co2_mt,0) AS co2_mt_other_wind_wood,
-		 COALESCE(swwd.so2_mt,0) AS so2_mt_other_wind_wood,
-		 COALESCE(swwd.nox_mt,0) AS nox_mt_other_wind_wood,		 
+		 COALESCE(swwd.generation_mwh,0) AS generation_mwh_wood,
+		 COALESCE(swwd.co2_mt,0) AS co2_mt_wood,
+		 COALESCE(swwd.so2_mt,0) AS so2_mt_wood,
+		 COALESCE(swwd.nox_mt,0) AS nox_mt_wood,		 
 		 COALESCE(sncd.generation_mwh,0) AS generation_mwh_nuclear,
 		 COALESCE(spd.generation_mwh,0) AS generation_mwh_pumped,
 		 COALESCE(ssd.generation_mwh,0) AS generation_mwh_solar,
@@ -495,7 +495,7 @@ AS
 	  ON s.state = swd.state 
 	 AND std.year = swd.year LEFT OUTER JOIN state_petro_data sptd
 	  ON s.state = sptd.state 
-	 AND std.year = sptd.year LEFT OUTER JOIN state_wind_wood_data swwd
+	 AND std.year = sptd.year LEFT OUTER JOIN state_wood_data swwd
 	  ON s.state = swwd.state 
 	 AND std.year = swwd.year LEFT OUTER JOIN state_greenhouse_emissions sge
 	  ON s.state = sge.state
