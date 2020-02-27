@@ -51,7 +51,7 @@ d3.json('static/data/state_data.json').then(function(data){
    
     console.log(states)
     var svgArea = d3
-    .select("#heatmap")
+    .select("#chart1")
     .select("svg")
 
 
@@ -60,7 +60,7 @@ d3.json('static/data/state_data.json').then(function(data){
     }
 
     //select where the plot will be located in the body of the html
-    var svg = d3.select("#heatmap").append('svg')
+    var svg = d3.select("#chart1").append('svg')
     .attr("height", svgHeight)
     .attr("width", svgWidth)
     .append("g")
