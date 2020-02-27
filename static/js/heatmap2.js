@@ -32,11 +32,12 @@ function plotMap(yr){
     var facility11=[];
     for (var i=0;i<facilities.length;i++){
       var location=[facilities[i].latitude,facilities[i].longitude,facilities[i].emissions_mt];
-      var marker=L.circle([facilities[i].latitude,facilities[i].longitude],{stroke:false,fillOpacity:.75,radius:facilities[i].emissions_mt/300}).bindPopup(`<h3>${facilities[i].facility_name}<hr>Greenhouse Emissions (mt): ${facilities[i].emissions_mt}</h3>`);
+      var marker=L.circle([facilities[i].latitude,facilities[i].longitude],{color:"red",stroke:false,fillOpacity:.75,radius:facilities[i].emissions_mt/300}).bindPopup(`<h4>${facilities[i].facility_name}</h4><h5><hr>Greenhouse Emissions (mt): ${facilities[i].emissions_mt}</h5>`);
       if (facilities[i].year==2018){
         heatlayer18.push(location);
-        facility18.push(marker);}
-      if (facilities[i].year== filter_year.property('value')){
+        facility18.push(marker);
+      }
+      if (facilities[i].year== 2015) {
         heatlayerfilter.push(location);
         facilityfilter.push(marker);}
       if (facilities[i].year==2011){
@@ -68,14 +69,14 @@ function plotMap(yr){
     var layer11=L.layerGroup(facility11);
 
     var overlaymaps={
-      // '2018 Facilities':layer18,
-      'Filtered Facilities' :layerfilter//,
-      // '2011 Facilities':layer11};
+      '2018 Facilities':layer18,
+      '2015 Facilities' :layerfilter,
+      '2011 Facilities':layer11
     }
 
     var map=L.map('heatmap',{
-      center:[40.7128,-74.0059],
-      zoom:8,
+      center: [37.09, -95.71],
+      zoom:5,
       layers:[street,layerfilter]});
 
       L.control.layers(basemaps,overlaymaps,{collapsed:false}).addTo(map);
