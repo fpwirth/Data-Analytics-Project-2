@@ -15,6 +15,35 @@ DROP VIEW IF EXISTS state_list;
 DROP VIEW IF EXISTS state_data_by_year;
 DROP VIEW IF EXISTS state_aqi_pct_change;
 
+-- data fix for air_quality
+  -- adding a total row for 'US'
+  INSERT INTO air_quality
+  		(
+		 state,
+		 year,
+		 cbsa_code,
+		 days_with_aqi,
+		 good_days,
+		 moderate_days,
+		 unhealthy_days,
+		 unhealthy_sensitive_days,
+		 very_unhealthy_days,
+		 hazardous_days
+		)
+  SELECT 'US' AS sate,
+  		 year,
+		 'n/a' AS cbsa_code,
+		 SUM(days_with_aqi),
+		 SUM(good_days),
+		 SUM(moderate_days),
+		 SUM(unhealthy_days),
+		 SUM(unhealthy_sensitive_days),
+		 SUM(very_unhealthy_days),
+		 SUM(hazardous_days)
+    FROM air_quality
+   WHERE state <> 'PR'	
+GROUP BY year
+
 -- create views for analysis, charting, drop-down lists, pop-ups and...fun
 
 -- state list (for drop downs, and metadata for pop-ups)
