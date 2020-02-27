@@ -3,7 +3,7 @@ function plotlyinit(){
   var stateplot='US';
   var yearmap=2018;
   buildplot(stateplot);
-  buildmap(yearmap)}
+  buildmap(yearmap)};
 
 //Function to build state plots
 function buildplot(stateplot){
@@ -48,6 +48,8 @@ function buildplot(stateplot){
       {x:years,y:greenhousevalues,name:'Greenhouse Emissions',yaxis:'y2',type:'scatter'}];
     var genlayout={
       title:`${state} Power Generation by Type`,
+      plot_bgcolor:'rgb(215,215,215)',
+      paper_bgcolor:'rgb(215,215,215)',
       yaxis:{title:'Generation (MWh)'},
       yaxis2:{title:'Emissions (metric tons of carbon dioxide)',overlaying:'y',side:'right'},
       legend:{orientation:'h'}};
@@ -137,7 +139,7 @@ function buildmap(yearmap){
         lonaxis:{},
         lataxis:{}}};
     Plotly.newPlot('chart5',mapdata,maplayout);
-  });}
+  });};
 
 //Listener, on change to the DOM, call changestate function
 d3.select('#state_selected').on('change',changestate);
