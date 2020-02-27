@@ -1,8 +1,11 @@
+//Function to create plot for initial graph using US data
 function init(){
-  var stateplot='TX';
+  var stateplot='US';
   buildplot(stateplot);}
 
+//Function to build state plots
 function buildplot(stateplot){
+  console.log(stateplot);
   d3.json('static/data/state_data.json').then(function(states){
     var state=stateplot;
     var filteredstate=states.filter(states=>states.state==state);
@@ -47,10 +50,13 @@ function buildplot(stateplot){
       legend:{font:{size:4},orientation:'h'}};
     Plotly.newPlot('chart2',traces,layout);});}
 
+//Listener, on change to the DOM, call changestate function
 d3.select('#state_selected').on('change',changestate);
 
+//Build initial plot on load
 init();
 
+//Function to change state plots
 function changestate(){
   let stateplot=d3.select('#state_selected').node().value;
   buildplot(stateplot)};
