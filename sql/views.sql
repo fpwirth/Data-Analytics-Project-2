@@ -15,6 +15,59 @@ DROP VIEW IF EXISTS state_list;
 DROP VIEW IF EXISTS state_data_by_year;
 DROP VIEW IF EXISTS state_aqi_pct_change;
 
+-- DATA FIXES
+
+  --fixing missing facility id for a facility in Texas with no lat and long
+  UPDATE facility
+     SET latitude = 29.487663,
+	 	 longitude = -94.983031
+   WHERE facility_id = '1012447';
+
+  -- remove any greenhouse emissions for us
+  DELETE FROM state_greenhouse_emissions WHERE state = 'US';
+  
+  --add the emissions total back in for us
+    INSERT INTO state_greenhouse_emissions
+  		(state,
+		 year,
+		 greenhouse_emissions)
+  SELECT 'US',
+  		 year,
+		 SUM(greenhouse_emissions)
+    FROM state_greenhouse_emissions
+GROUP BY year;
+
+  -- just in case the data is already loaded
+  DELETE FROM air_quality WHERE state = 'US';
+  
+   -- adding a total row for 'US'
+  INSERT INTO air_quality
+  		(
+		 state,
+		 year,
+		 cbsa_code,
+		 days_with_aqi,
+		 good_days,
+		 moderate_days,
+		 unhealthy_days,
+		 unhealthy_sensitive_days,
+		 very_unhealthy_days,
+		 hazardous_days
+		)
+  SELECT 'US' AS sate,
+  		 year,
+		 'n/a' AS cbsa_code,
+		 SUM(days_with_aqi),
+		 SUM(good_days),
+		 SUM(moderate_days),
+		 SUM(unhealthy_days),
+		 SUM(unhealthy_sensitive_days),
+		 SUM(very_unhealthy_days),
+		 SUM(hazardous_days)
+    FROM air_quality
+   WHERE state <> 'PR'	
+GROUP BY year;
+
 -- create views for analysis, charting, drop-down lists, pop-ups and...fun
 
 -- state list (for drop downs, and metadata for pop-ups)

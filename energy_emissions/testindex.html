@@ -33,6 +33,7 @@
           <div class="jumbotron text-center green">
             <div class="banner_h1">
               <h1>The Big Green Dashboard</h1>
+              <h4>How we generate power affects our air</h4>
             </div>
           </div>      
         </div>
@@ -48,11 +49,11 @@
           </div>
           <div class="row">
             <div class="col-md-5">
-              <div id="year_slider" style="height:10px; width:85%;">Year</div>
+              <div id="year_slider" name="year_slider" style="height:10px; width:85%;">Year</div>
             </div>
             <div class="col-md-3">
               <label for="year_selected">Selected: </label>
-              <input type="text" id="year_selected" readonly class="input_short">    
+              <input type="text" id="year_selected" name="year_selected" readonly class="input_short">    
             </div>
             <div class="col-md-4">
               <label for="state_selected">State: </label>        
@@ -97,7 +98,7 @@
 <script type="text/javascript" src="static/js/app.js"></script>
 <script type="text/javascript" src="static/js/heatmap2.js"></script>
 <script type="text/javascript" src="static/js/leaflet-heat.js"></script>
-<!-- <script type="text/javascript" src="static/js/aqi_app2.js"></script> -->
+<script type="text/javascript" src="static/js/aqi_app2.js"></script>
 <script type="text/javascript" src="static/js/states2.js"></script>
 </body>
 </html>
