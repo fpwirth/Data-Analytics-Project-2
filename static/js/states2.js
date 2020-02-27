@@ -59,9 +59,10 @@ function buildmap(yearmap){
   d3.json('static/data/state_data.json').then(function(states){
     var year=yearmap;
     var filteredyear=states.filter(states=>states.year==year);
-    console.log(filteredyear);
   //Create year map plot
-    // var mapdata=[{
+    var states=filteredyear.map(state=>state.state);
+    var greenhousevalues=filteredyear.map(state=>state.greenhouse_emissions);
+    //var mapdata=[{
     //   type:'choropleth',
     //   locationmode:'USA-states',
     //   locations:
