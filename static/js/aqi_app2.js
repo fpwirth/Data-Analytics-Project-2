@@ -3,14 +3,14 @@ function d3init(){
     aqiPlot(aqiyear)}
 
 var n = 2;
-var m = 51;
+var m = 52;
 var stack = d3.stack();
 
-var svgWidth = 500;
-var svgHeight = 300;
-var padding = 700;
+var svgWidth = 800;
+var svgHeight = 150;
+var padding = 600;
 
-var margin = {top: 40, right: 10, bottom: 20, left: 35},
+var margin = {top: 5, right: 5, bottom: 20, left: 35},
     width = svgWidth - margin.left - margin.right,
     height = svgHeight - margin.top - margin.bottom;
 
@@ -51,7 +51,7 @@ d3.json('static/data/state_data.json').then(function(data){
    
     console.log(states)
     var svgArea = d3
-    .select("#chart1")
+    .select("#heatmap")
     .select("svg")
 
 
@@ -60,7 +60,7 @@ d3.json('static/data/state_data.json').then(function(data){
     }
 
     
-    var svg = d3.select("#chart1").append('svg')
+    var svg = d3.select("#heatmap").append('svg')
     .attr("height", svgHeight)
     .attr("width", svgWidth)
     .append("g")
@@ -100,8 +100,14 @@ d3.json('static/data/state_data.json').then(function(data){
 
     var xAxis = d3.axisBottom()
         .scale(x)
-        .tickSize(0)
+        .tickSize(2)
         .tickPadding(6)
+        .ticks(m)
+        .tickFormat(function (d){
+            return states[d]
+        });
+        // .style("font", "14px")
+        // .outerTickSize()
         
     var yAxis = d3.axisLeft()
         .scale(y)
@@ -133,6 +139,7 @@ d3.json('static/data/state_data.json').then(function(data){
     svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
+        .style("font", "8px times")
         .call(xAxis);
     
     svg.append("g")
@@ -146,7 +153,8 @@ d3.json('static/data/state_data.json').then(function(data){
 
     var legend = svg.append('g')
                 .attr('class', 'legend')
-                .attr('transform', 'translate(' + (padding + 50) + ', 0)');
+                .attr('transform', 'translate(' + (padding + 20) + ', 0)')
+                .style("font-size", "10px");
 
             legend.selectAll('rect')
                 .data(keysLabel)
@@ -157,7 +165,7 @@ d3.json('static/data/state_data.json').then(function(data){
                     return i * 18;
                 })
                 .attr('width', 12)
-                .attr('height', 12)
+                .attr('height',12)
                 .attr('fill', function(d, i){
                     return color(i);
                 });

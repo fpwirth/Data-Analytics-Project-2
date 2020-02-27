@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Energy Emissions</title>
+  <!-- reset the CSS -->
+  <link rel="stylesheet" href="static/css/reset.css">
+  <!-- javascript files for jquery and jquery ui-->
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
+  <!-- bootstrap for the formatting -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <!-- css for jquery ui and ui theme (green) -->
+  <link rel="stylesheet" href="static/css/jquery-ui.css">
+  <link rel="stylesheet" href="static/css/jquery-ui.structure.css">
+  <link rel="stylesheet" href="static/css/jquery-ui.theme.css">
+  <!-- D3, Plotly and Leaflet CSS & JS -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script><!--D3 cdn-->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <!-- link to custom CSS, used in all html pages in the project-->
+  <link rel="stylesheet" href="static/css/styles.css">  
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+          <div class="jumbotron text-center green">
+            <div class="banner_h1">
+              <h1>The Big Green Dashboard</h1>
+              <h4>How we generate power affects our air</h4>
+            </div>
+          </div>      
+        </div>
+    </div>
+    <!-- row for filter -->
+    <div class="row" id="filter_row">
+      <div class="col-md-12">
+        <div class="filter_div">
+          <div class="row">
+            <div class="col-md-12">
+              <h4>Interactive Filter</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5">
+              <div id="year_slider" name="year_slider" style="height:10px; width:85%;">Year</div>
+            </div>
+            <div class="col-md-3">
+              <label for="year_selected">Selected: </label>
+              <input type="text" id="year_selected" name="year_selected" readonly class="input_short">    
+            </div>
+            <div class="col-md-4">
+              <label for="state_selected">State: </label>        
+              <select id="state_selected" name="state_selected">
+              </select>  
+            </div>
+          </div>
+        </div>              
+      </div>
+    </div>   
+        <!-- heat map row-->
+    <div class="row" id="toggle_row">
+        <div class = "col-md-12">
+        <!-- throw the heat map in here, #heat_map_chart-->
+          <div id="toggle">
+            <form>
+                <label><input type="radio" name="mode" value="grouped"> Grouped</label>
+                <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
+              </form>
+            </div>        
+          </div>
+         </div>
+        </div>
+    </div>     
+    <!-- heat map row-->
+    <div class="row" id="heatmap_row">
+      <div class = "col-md-12">
+        <!-- throw the heat map in here, #heat_map_chart-->
+        <div id="heatmap">
+        </div>
+      </div>
+    </div>
+    <!-- other charts (2)-->
+    <div class="row" id="other_row">
+      <div class = "col-md=6 col-sm-12">
+        <!-- put the first smaller chart here-->
+        <div id= "chart1">
+
+      <div class = "col-md=6 col-sm-12">
+        <!-- put the second smaller chart here-->
+        <div id= "chart2">
+        </div>        
+      </div>
+    </div>
+  <div id="sysmessage_dialog" title="System Message">
+    <span id="message_text"></span>
+  </div>
+</div>
+<!-- custom application javascript file, using jquery and jquery ui-->
+<script type="text/javascript" src="static/js/config.js"></script>
+<script type="text/javascript" src="static/js/app.js"></script>
+<script type="text/javascript" src="static/js/heatmap2.js"></script>
+<script type="text/javascript" src="static/js/leaflet-heat.js"></script>
+<script type="text/javascript" src="static/js/aqi_app2.js"></script>
+<!-- <script type="text/javascript" src="static/js/states2.js"></script> -->
+</body>
+</html>
