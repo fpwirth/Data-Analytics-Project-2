@@ -74,7 +74,8 @@ $( document ).ready(function() {
     $state_selected.append(new Option('Wyoming','WY')); 
     $state_selected.append(new Option('Washington DC','DC')); 
     
-    $state_selected.val('TX')
+    $state_selected.val('US')
+
     // drop down list for state
     // var stateURL = "data/state_list";
     // $.getJSON( stateURL, {
