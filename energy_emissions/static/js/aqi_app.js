@@ -17,7 +17,7 @@ var formatPercent = d3.format(".0%");
 var formatNumber = d3.format("");
         
 var url = "static/data/state_data.json"
-// var url = "/data/state_data"
+// var url = "http://127.0.0.1:500/data/state_data"
 var filterYear = d3.select('#year_selected');
 
 document.getElementsByName("year_selected")[0].addEventListener('change', aqiPlot);
@@ -46,7 +46,7 @@ function aqiPlot(){
     
         console.log(states)
         var svgArea = d3
-        .select("#heatmap")
+        .select("#chart1")
         .select("svg")
 
 
@@ -55,7 +55,7 @@ function aqiPlot(){
         }
 
         
-        var svg = d3.select("#heatmap").append('svg')
+        var svg = d3.select("#chart1").append('svg')
         .attr("height", svgHeight)
         .attr("width", svgWidth)
         .append("g")
@@ -232,4 +232,4 @@ function aqiPlot(){
 
 
 
-// aqiPlot();
+aqiPlot();
