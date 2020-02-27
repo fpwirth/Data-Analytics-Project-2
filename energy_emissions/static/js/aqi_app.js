@@ -16,8 +16,8 @@ var formatNumber = d3.format("");
 var formatPercent = d3.format(".0%");
 var formatNumber = d3.format("");
         
-// var url = "static/js/state_records_test.json"
-var url = "/data/state_data"
+var url = "static/data/state_data.json"
+// var url = "/data/state_data"
 var filterYear = d3.select('#year_selected');
 
 document.getElementsByName("year_selected")[0].addEventListener('change', aqiPlot);
