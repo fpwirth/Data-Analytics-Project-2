@@ -64,6 +64,7 @@ $( document ).ready(function() {
     $state_selected.append(new Option('South Dakota','SD')); 
     $state_selected.append(new Option('Tennessee','TN')); 
     $state_selected.append(new Option('Texas','TX')); 
+    $state_selected.append(new Option('United States (Total)','US'));     
     $state_selected.append(new Option('Utah','UT')); 
     $state_selected.append(new Option('Virginia','VA')); 
     $state_selected.append(new Option('Vermont','VT')); 
@@ -72,8 +73,6 @@ $( document ).ready(function() {
     $state_selected.append(new Option('West Virginia','WV')); 
     $state_selected.append(new Option('Wyoming','WY')); 
     $state_selected.append(new Option('Washington DC','DC')); 
-    $state_selected.append(new Option('Puerto Rico','PR')); 
-    $state_selected.append(new Option('United States (Total)','US')); 
     
     $state_selected.val('TX')
     // drop down list for state
