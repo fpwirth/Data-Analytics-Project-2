@@ -58,20 +58,37 @@ function buildmap(yearmap){
   //Get data and filter by state
   d3.json('static/data/state_data.json').then(function(states){
     var year=yearmap;
-    var filteredyear=states.filter(states=>states.year==year);
+    var tempfilteredyear=states.filter(states=>states.year==year);
+    var filteredyear=tempfilteredyear.filter(tempfilteredyear=>tempfilteredyear.state!='US');
   //Create year map plot
     var states=filteredyear.map(state=>state.state);
+    var statenames=filteredyear.map(state=>state.state_name);
     var greenhousevalues=filteredyear.map(state=>state.greenhouse_emissions);
-    //var mapdata=[{
-    //   type:'choropleth',
-    //   locationmode:'USA-states',
-    //   locations:
-    //}];
+    var mapdata=[{
+      type:'choropleth',
+      locationmode:'USA-states',
+      locations:states,
+      z:greenhousevalues,
+      text:statenames,
+      autocolorscale:true}];
+    var maplayout={
+      title:'State',
+      geo:{
+        scope:'usa',
+        countrycolor:'rgb(255, 255, 255)',
+        showland:true,
+        landcolor:'rgb(217, 217, 217)',
+        showlakes:true,
+        lakecolor:'rgb(255, 255, 255)',
+        subunitcolor:'rgb(255, 255, 255)',
+        lonaxis:{},
+        lataxis:{}}};
+    Plotly.newPlot('chart3',mapdata,maplayout);
   });}
 
 //Listener, on change to the DOM, call changestate function
 d3.select('#state_selected').on('change',changestate);
-d3.select('#year_selected').on('change',changeyear);
+d3.select('#year_slider').on('click',changeyear);
 
 //Build initial plots on load
 plotlyinit();
@@ -83,5 +100,5 @@ function changestate(){
 
 //Function to change year plots
 function changeyear(){
-  let yearmap=d3.select('#year_selected').node().value;
+  let yearmap=d3.select('#year_selected').property('value');
   buildmap(yearmap)};
