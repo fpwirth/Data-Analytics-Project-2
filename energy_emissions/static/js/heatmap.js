@@ -1,76 +1,61 @@
-// stuff for the filter
-var filter_year = d3.select('#year_selected');
+//Function to create initial heatmap for all powerplants using US data
+function leafletinit(){
+  var yearheat=2018;
+  buildheat(yearheat)};
 
-// on change call function
-filter_year.on('change', function(){
-
-  plotMap();
-
-});
-
-function plotMap() {
-
-  var year_input = filter_year.property('value');
-  
-  var street=L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',{
+//Function to build annual heatmaps and show individual power plants
+function buildheat(yearheat){
+  var heatlayer=[];
+  var facility=[];
+  //Get data and filter by year
+  d3.json('data/facility_data').then(function(facilities){
+    var year=yearheat;
+    var tempfilteredheat=facilities.filter(facilities=>facilities.year==year);
+    var filteredheat=tempfilteredheat.filter(tempfilteredheat=>tempfilteredheat.state!='US');
+  //Create annual facility and heat layer data
+    for (var i=0;i<filteredheat.length;i++){
+      var location=[filteredheat[i].latitude,filteredheat[i].longitude,filteredheat[i].emissions_mt];
+      var marker=L.circle([filteredheat[i].latitude,filteredheat[i].longitude],{stroke:false,color:'red',fillOpacity:.5,radius:filteredheat[i].emissions_mt/300}).bindPopup(`<h3>${filteredheat[i].facility_name}<hr>Greenhouse Emissions (mt): ${filteredheat[i].emissions_mt}</h3>`);
+      heatlayer.push(location);
+      facility.push(marker);};
+  //Create basemaps
+    var street=L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',{
       attribution:'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
       maxZoom:18,
       id:'mapbox.streets',
       accessToken:API_KEY});
-
-  var dark=L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',{
-    attribution:'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom:18,
-    id:'mapbox.dark',
-    accessToken:API_KEY});
-
-  var basemaps={
-    'Street Map':street,
-    'Dark Map':dark};
-
-  var map=L.map('heatmap',{
-      center:[40.7128,-74.0059],
-      zoom:8,
+    var comic=L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',{
+      attribution:'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom:18,
+      id:'mapbox.comic',
+      accessToken:API_KEY});
+    var basemaps={
+      'Street Map':street,
+      'USA Map':comic};
+    var map=L.map('heatmap',{
+      center:[39.8333,-98.5833],
+      zoom:4,
       layers:[street]});
-
-  var heatlayer18=[];
-  var facility18=[];
-  var heatlayerfilter=[];
-  var facilityfilter=[];
-  var heatlayer11=[];
-  var facility11=[];
-
-  d3.json('data/facility_data').then(function(facilities){
-    // console.log(facilities);
-    for (var i=0;i<facilities.length;i++){
-      var location=[facilities[i].latitude,facilities[i].longitude,facilities[i].emissions_mt];
-      var marker=L.circle([facilities[i].latitude,facilities[i].longitude],{stroke:false,fillOpacity:.75,radius:facilities[i].emissions_mt/300}).bindPopup(`<h3>${facilities[i].facility_name}<hr>Greenhouse Emissions (mt): ${facilities[i].emissions_mt}</h3>`);
-      if (facilities[i].year==2018){
-        heatlayer18.push(location);
-        facility18.push(marker);}
-      if (facilities[i].year == year_input){
-        heatlayerfilter.push(location);
-        facilityfilter.push(marker);}
-      if (facilities[i].year==2011){
-        heatlayer11.push(location);
-        facility11.push(marker);}};
-
-    // console.log(facility17);
-
-    var layer18=L.layerGroup(facility18);
-    var layerfilter=L.layerGroup(facilityfilter);
-    var layer11=L.layerGroup(facility11);
-    
-    var filterLabel = year_input + ' Facilities';
-
+  //Create heatlayer for year
+    L.heatLayer(heatlayer,{
+      radius: 5,
+      blur: 10
+    }).addTo(map);
+  //Create layer control for map
     var overlaymaps={
-      '2018 Facilities':layer18,
-      filterLabel : layerfilter,
-      '2011 Facilities':layer11};
+      'Power Plants':L.layerGroup(facility)};
+    L.control.layers(basemaps,overlaymaps,{collapsed:false}).addTo(map);
+});};
 
-    L.control.layers(basemaps,overlaymaps).addTo(map);
-  });
-}
+//Listener, on change to the DOM, call changeheat function
+d3.select('#year_slider').on('click',changeheat);
 
-// initialize the map
-plotMap();
+//Build initial map on load
+leafletinit();
+
+//Function to change year heatmaps
+function changeheat(){
+  let yearheat=d3.select('#year_selected').property('value');
+  d3.select('#heatmapdiv').html('');
+  d3.select('#heatmapdiv').html('<div id="heatmap"></div>');
+  buildheat(yearheat)};
