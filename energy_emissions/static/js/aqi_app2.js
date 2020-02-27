@@ -1,19 +1,19 @@
 function d3init(){
     var aqiyear=2018;
     aqiPlot(aqiyear)}
-
+// varibles to set the number of variables (n) and the number of states (m) and the d3.stack function to stack the bar chart
 var n = 2;
 var m = 52;
 var stack = d3.stack();
-
+// setup the svg canvas
 var svgWidth = 800;
 var svgHeight = 150;
 var padding = 700;
-
+// setup chart margin
 var margin = {top: 5, right: 5, bottom: 20, left: 35},
     width = svgWidth - margin.left - margin.right,
     height = svgHeight - margin.top - margin.bottom;
-
+//format por the labels in the plot
 var formatPercent = d3.format("%");
 var formatNumber = d3.format("");
 // console.log(filterYear);
@@ -29,7 +29,7 @@ var formatNumber = d3.format("");
 function aqiPlot(aqiyear){
 
 
-
+// get the json file
 d3.json('static/data/state_data.json').then(function(data){
     var aqiData = data
     console.log(aqiData)
@@ -37,7 +37,7 @@ d3.json('static/data/state_data.json').then(function(data){
     console.log(inputYear)
          // Filter the data to keep only records for the chosen year
     var filteredData = aqiData.filter(aqiData => aqiData.year == inputYear);
-    
+    //
     var summaryData = filteredData.map(function(d){
         return {
             year: d.year,
@@ -46,7 +46,7 @@ d3.json('static/data/state_data.json').then(function(data){
             state: d.state
         }
     })
-    
+    // get the states as a variable to use in the tick label and more
     var states = summaryData.map(d => d.state)
    
     console.log(states)
@@ -59,7 +59,7 @@ d3.json('static/data/state_data.json').then(function(data){
         svgArea.remove();
     }
 
-    
+    //select where the plot will be located in the body of the html
     var svg = d3.select("#heatmap").append('svg')
     .attr("height", svgHeight)
     .attr("width", svgWidth)
@@ -77,10 +77,10 @@ d3.json('static/data/state_data.json').then(function(data){
 
     console.log(stackedSeries)
 
-//     
+//  // plot range   
     yStackMax = d3.max(stackedSeries, function(layer) { return d3.max(layer, function(d) { return d[1]; }); }),
     yGroupMax = d3.max(stackedSeries, function(layer) { return d3.max(layer, function(d) { return d[1] - d[0]; }); });
-
+// setting up the axis
     var x = d3.scaleBand()
         .domain(d3.range(m))
         .rangeRound([0, width])
