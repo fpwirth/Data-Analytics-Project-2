@@ -6,21 +6,16 @@ var n = 2;
 var m = 51;
 var stack = d3.stack();
 
-var svgWidth = 960;
-var svgHeight = 500;
+var svgWidth = 500;
+var svgHeight = 300;
 var padding = 700;
 
 var margin = {top: 40, right: 10, bottom: 20, left: 35},
     width = svgWidth - margin.left - margin.right,
     height = svgHeight - margin.top - margin.bottom;
 
-var formatPercent = d3.format(".0%");
+var formatPercent = d3.format("%");
 var formatNumber = d3.format("");
-
-
-var formatPercent = d3.format(".0%");
-var formatNumber = d3.format("");
-
 // console.log(filterYear);
 // console.log("LOURDES!");
 
@@ -29,7 +24,7 @@ var formatNumber = d3.format("");
 // }
 
 
-
+// document.getElementById("year_selected")[0].addEventListener('change', aqiPlot);
 
 function aqiPlot(aqiyear){
 
@@ -40,7 +35,7 @@ d3.json('static/data/state_data.json').then(function(data){
     console.log(aqiData)
     var inputYear = aqiyear
     console.log(inputYear)
-     // Filter the data to keep only records for the chosen year
+         // Filter the data to keep only records for the chosen year
     var filteredData = aqiData.filter(aqiData => aqiData.year == inputYear);
     
     var summaryData = filteredData.map(function(d){
@@ -92,8 +87,8 @@ d3.json('static/data/state_data.json').then(function(data){
         .padding(0.1)
         .align(0.1);
 
-    var x1 = d3.scaleBand()
-        .padding(0.05);
+    // var x1 = d3.scaleBand()
+    //     .padding(0.05);
 
     var y = d3.scaleLinear()
         .domain([0, yStackMax])
@@ -240,12 +235,14 @@ d3.json('static/data/state_data.json').then(function(data){
 });
 
 }
-d3.select('#year_selected').on('change',changeaqi);
+
+
+d3.select('#year_slider').on('click',changeaqi);
 //document.getElementById("year_selected")[0].addEventListener('change', changeaqi);
 
 d3init();
 
 function changeaqi(){
-    let aqiyear=d3.select('#year_selected').node().value;
+    let aqiyear=d3.select("#year_selected").property('value');
     aqiPlot(aqiyear)
 }
