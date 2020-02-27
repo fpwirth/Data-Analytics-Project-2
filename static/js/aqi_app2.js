@@ -191,7 +191,7 @@ d3.json('static/data/state_data.json').then(function(data){
         // setTimeout(function() {
         //     d3.select("input[value=\"percent\"]").property("checked", true).each(change);
         // }, 2000);
-    }, 2000);
+    }, 200);
 
 
     function change() {
