@@ -8,7 +8,7 @@ var stack = d3.stack();
 
 var svgWidth = 800;
 var svgHeight = 150;
-var padding = 600;
+var padding = 700;
 
 var margin = {top: 5, right: 5, bottom: 20, left: 35},
     width = svgWidth - margin.left - margin.right,
@@ -68,7 +68,7 @@ d3.json('static/data/state_data.json').then(function(data){
 
     // var keys = [0,1]
     var keys = ['good_days_percent', 'bad_days_percent']
-    var keysLabel = ['Air Quality Index: Good', 'Air Quality Index: Bad']
+    var keysLabel = ['Good', 'Bad']
     var stack = d3.stack()
         .keys(keys)
         .order(d3.stackOrderDescending);
@@ -154,7 +154,9 @@ d3.json('static/data/state_data.json').then(function(data){
     var legend = svg.append('g')
                 .attr('class', 'legend')
                 .attr('transform', 'translate(' + (padding + 20) + ', 0)')
-                .style("font-size", "10px");
+                .style("font-size", "10px")
+                .attr("height", 300)
+                .attr("width", 300)
 
             legend.selectAll('rect')
                 .data(keysLabel)
