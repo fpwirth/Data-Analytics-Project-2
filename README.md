@@ -17,9 +17,10 @@ The project is made up of a PostgreSQL database, a flask application and a web-d
 |5.     |Run the notebook "AQI.ipynb", this will load and clean the air quality data                        |
 |6.     |Run the notebook "Raw Data Importing.ipynb", this will load and clean the EIA energy/emissions data|
 |7.     |Run the notebook "import_data.ipynb", this will import the csv's, the outputs of the previous notebooks, and some additional metadata found in the raw-data folder|
-|8.     |Open the site and enjoy!                                                                           |
-|9.     |Run the views script "views.sql", this will create all of the views that will be used to chart data.  Also has a data fix for facility and adds US-total rows to air_quality and emissions datasets|
-|10.    |Run the update_nulls.sql query, this will update some of the null values in the state data table|
+|8.     |Run the views script "views.sql", this will create all of the views that will be used to chart data.  Also has a data fix for facility and adds US-total rows to air_quality and emissions datasets|
+|9.    |Run the update_nulls.sql query, this will update some of the null values in the state data table|
+|10. |Start up the Flask application app.py|
+|11.     |Open the site and enjoy!                                                                           |
 
 ### Link to Site
 [Energy and Clean Air Analysis Dashboard](https://fpwirth.github.io/Data-Analytics-Project-2/)
