@@ -78,7 +78,7 @@ d3.json(url).then(function(data){
     
     var stackedSeries = stack(summaryData)
 
-    console.log(stackedSeries)
+    // console.log(stackedSeries)
 
 //     
     yStackMax = d3.max(stackedSeries, function(layer) { return d3.max(layer, function(d) { return d[1]; }); }),

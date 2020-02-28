@@ -17,6 +17,10 @@ DROP VIEW IF EXISTS state_aqi_pct_change;
 
 -- DATA FIXES
 
+  -- roudning the emissions values
+  UPDATE state_greenhouse_emissions
+     SET greenhouse_emissions = ROUND(greenhouse_emissions);
+	 
   --fixing missing facility id for a facility in Texas with no lat and long
   UPDATE facility
      SET latitude = 29.487663,

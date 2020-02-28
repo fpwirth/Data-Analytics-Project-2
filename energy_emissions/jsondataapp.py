@@ -16,11 +16,16 @@ connection = psycopg2.connect(host=hostname, user=username, password=password, d
 state_list = pd.read_sql_query('select * from "state_list"',con=connection)
 state_data = pd.read_sql_query('select * from "state_data_by_year"',con=connection)
 facility_data = pd.read_sql_query('select * from "facility_emissions_by_year"',con=connection)
+aqi_data = pd.read_sql_query('select state, year, cbsa_code, days_with_aqi, good_days, moderate_days, unhealthy_days, unhealthy_sensitive_days, very_unhealthy_days, hazardous_days, aqi_max, aqi_90_percentile, aqi_median FROM air_quality ORDER BY state, year',con=connection)
+greenhouse_data = pd.read_sql_query('select state, year, greenhouse_emissions from state_greenhouse_emissions order by state, year', con=connection)
+
 
 #Create data json files
 state_list.to_json('static/data/state_list.json')
 state_data.to_json('static/data/state_data.json',orient='records')
 facility_data.to_json('static/data/facility_data.json',orient='records')
+aqi_data.to_json('static/data/air_quality_data.json',orient='split', index=False)
+greenhouse_data.to_json('static/data/greenhouse_data.json',orient='split', index=False)
 
 #All done!
 print('ALL DONE!')

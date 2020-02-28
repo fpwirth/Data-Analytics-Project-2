@@ -74,21 +74,9 @@ $( document ).ready(function() {
     $state_selected.append(new Option('Wyoming','WY')); 
     $state_selected.append(new Option('Washington DC','DC')); 
     
-    $state_selected.val('US')
+    $state_selected.val('US');
 
-    // drop down list for state
-    // var stateURL = "data/state_list";
-    // $.getJSON( stateURL, {
-    //     // tags: "mount rainier",
-    //     tagmode: "any",
-    //     format: "json"
-    // })
-    // .done(function( data ) {
-    //   $.each( data.items, function( i, item ) {
-    //       console.log(item);
-
-    //     });
-    // });
+    // $state_selected.selectmenu("refresh");
 
     // dialog for system messages
     var $sysmessage_dialog = $('#sysmessage_dialog').dialog({
@@ -110,5 +98,93 @@ $( document ).ready(function() {
 
     // span for message text
     var $message_text = $('#message_text');
+
+    var aqi_url = "static/data/air_quality_data.json";
+    var $airQualityTable = $('#airQualityTable').DataTable({
+        'ajax': {
+            url: aqi_url,
+            dataSrc: 'data'
+        },
+        columns: [
+            { title: "State"},
+            { title: "Year"},
+            { title: "CBSA Code"},
+            { title: "Days With AQI"},
+            { title: "Good Days"},
+            { title: "Moderate Days"},
+            { title: "Unhealthy Days"},
+            { title: "Unhealthy Sensitive Days"},
+            { title: "Very Unhealthy Days"},
+            { title: "Hazardous Days"}
+        ]
+    })
+
+    $('#linkAirQuality').click(function() {
+
+        $airQualityTableDialog.dialog('open');
+
+    })
+
+    var $airQualityTableDialog = $('#airQualityTableDialog').dialog({
+        autoOpen: false,
+        modeal: true,
+        position: { 
+            my: "center", 
+            at: "top" 
+        },
+        width: "66%",
+        maxWidth: "768px",
+        height: "auto",
+        buttons: [
+            {
+                text: "Close",
+                class: "ui-button ui-widget ui-corner-all",
+                click: function() {
+                    $airQualityTableDialog.dialog('close');
+                }
+            }
+        ]
+    })
+
+    var $greenhouseTableDialog = $('#greenhouseTableDialog').dialog({
+        autoOpen: false,
+        modeal: true,
+        position: { 
+            my: "center", 
+            at: "top" 
+        },
+        width: "66%",
+        maxWidth: "768px",
+        height: "auto",
+        buttons: [
+            {
+                text: "Close",
+                class: "ui-button ui-widget ui-corner-all",
+                click: function() {
+                    $greenhouseTableDialog.dialog('close');
+                }
+            }
+        ]
+    });
+
+    var greenhouse_url = "static/data/greenhouse_data.json";
+    var $greenhouseTable = $('#greenhouseTable').DataTable({
+        'ajax': {
+            url: greenhouse_url,
+            dataSrc: 'data'
+        },
+        columns: [
+            { title: "State"},
+            { title: "Year"},
+            { title: "Greenhouse Emissions"}
+        ]
+    })
+
+    $('#linkGreenhouse').click(function() {
+
+        $greenhouseTableDialog.dialog('open');
+
+    })
+
 
 });
