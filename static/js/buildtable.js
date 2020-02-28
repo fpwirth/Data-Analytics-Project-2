@@ -1,3 +1,5 @@
+//Function to build tables and other things
+function buildtable(aqiurl,greenhouseurl){
 // A $( document ).ready() block.
 $( document ).ready(function() {
     // slider for year
@@ -99,7 +101,7 @@ $( document ).ready(function() {
     // span for message text
     var $message_text = $('#message_text');
 
-    var aqi_url = "static/data/air_quality_data.json";
+    var aqi_url = aqiurl;
     var $airQualityTable = $('#airQualityTable').DataTable({
         'ajax': {
             url: aqi_url,
@@ -167,7 +169,7 @@ $( document ).ready(function() {
         ]
     });
 
-    var greenhouse_url = "static/data/greenhouse_data.json";
+    var greenhouse_url = greenhouseurl;
     var $greenhouseTable = $('#greenhouseTable').DataTable({
         'ajax': {
             url: greenhouse_url,
@@ -188,3 +190,4 @@ $( document ).ready(function() {
 
 
 });
+};
