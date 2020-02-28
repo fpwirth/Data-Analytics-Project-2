@@ -1,13 +1,10 @@
 //Initial variables for plots
 var stateurl='/data/state_data';
 var facilityurl='/data/facility_data';
-var aqiurl='/data/air_quality_data.json';
-var greenhouseurl='/data/greenhouse_data.json';
 let year=2018;
 let stateplot='US';
 
 //Build initial plots on load
-buildtable(aqiurl,greenhouseurl);
 aqiPlot(stateurl,year);
 buildheat(facilityurl,year);
 buildplot(stateurl,stateplot);
