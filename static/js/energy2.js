@@ -7,7 +7,7 @@ let year=2018;
 let stateplot='US';
 
 //Build initial plots on load
-buildtable(aqiurl,greenhouseurl);
+// buildtable(aqiurl,greenhouseurl);
 aqiPlot(stateurl,year);
 buildheat(facilityurl,year);
 buildplot(stateurl,stateplot);
