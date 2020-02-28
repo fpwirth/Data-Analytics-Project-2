@@ -24,7 +24,10 @@ The focus of this project is looking at electricity generation and emissions to 
 
 ### Images
 !['Facility Dashboard Image not available'](/energy_emissions/static/images/facility_data_dashboard.png)\
-*Facility data dashboard screenshot*
+*Dashboard screenshot*
+
+!['Facility Pop-up Table Image not available'](/energy_emissions/static/images/pop_up_table_dashboard.png)\
+*Pop-up data table screenshot*
 
 !['ERD Image not available'](/energy_emissions/static/images/energy_db_ERD.png)\
 *Database (energy_db) ERD*
