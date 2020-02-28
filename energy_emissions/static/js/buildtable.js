@@ -75,8 +75,6 @@ $( document ).ready(function() {
     
     $state_selected.val('US');
 
-    // $state_selected.selectmenu("refresh");
-
     // dialog for system messages
     var $sysmessage_dialog = $('#sysmessage_dialog').dialog({
         autoOpen: false,
