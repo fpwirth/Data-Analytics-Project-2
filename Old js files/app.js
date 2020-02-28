@@ -20,7 +20,7 @@ $( document ).ready(function() {
     });
     $year_selected.val( $year_slider.slider( "value" ) );
 
-    // couldn't get the url to work, or by opening csv.  hard-coding states...
+    // couldn't get the url to work, or by opening csv.  hard-coding states (I'm sorry you had to see this)
     $state_selected.append(new Option('Alaska','AK')); 
     $state_selected.append(new Option('Alabama','AL')); 
     $state_selected.append(new Option('Arkansas','AR')); 

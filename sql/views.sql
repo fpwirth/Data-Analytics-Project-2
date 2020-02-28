@@ -14,13 +14,12 @@ DROP VIEW IF EXISTS facility_list;
 DROP VIEW IF EXISTS state_list;
 DROP VIEW IF EXISTS state_data_by_year;
 DROP VIEW IF EXISTS state_aqi_pct_change;
+DROP VIEW IF EXISTS state_generation_by_year;
+DROP VIEW IF EXISTS region_degreedays_by_year;
+DROP VIEW IF EXISTS state_facility_emissions_by_year;
 
 -- DATA FIXES
 
-  -- roudning the emissions values
-  UPDATE state_greenhouse_emissions
-     SET greenhouse_emissions = ROUND(greenhouse_emissions);
-	 
   --fixing missing facility id for a facility in Texas with no lat and long
   UPDATE facility
      SET latitude = 29.487663,
@@ -73,6 +72,60 @@ GROUP BY year;
 GROUP BY year;
 
 -- create views for analysis, charting, drop-down lists, pop-ups and...fun
+
+-- quick summary of facility emissions by state and year
+CREATE VIEW state_facility_emissions_by_year
+AS
+  SELECT f.state,
+  		 fe.year,
+		 ROUND(SUM(fe.emissions_mt)) AS total_facility_emissions
+    FROM facility f INNER JOIN facility_emissions fe
+	  ON f.facility_id = fe.facility_id
+GROUP BY f.state,
+		 fe.year;
+
+-- view of region and heating/cooling degree days by year
+CREATE VIEW region_degreedays_by_year
+AS
+  -- aggregating the split out data by region, and listing the states in a very cool string_agg function
+  SELECT rdd.region,
+  		 STRING_AGG(rs.state, ',' ORDER BY state) AS state_list,
+  		 rdd.year,
+		 rdd.cooling_degree_days,
+		 rdd.heating_degree_days
+    FROM region_degree_days rdd INNER JOIN state_region rs
+	  ON rdd.region = rs.region
+GROUP BY rdd.region,
+		 rdd.year,
+		 rdd.cooling_degree_days,
+		 rdd.heating_degree_days;
+
+-- view to show state generation by source and year, with percentage of total generation
+CREATE VIEW state_generation_by_year
+AS
+    WITH StateGenerationTotal
+	  AS
+	   (
+  SELECT state,
+		 year,
+		 ROUND(SUM(generation_mwh)) AS total_generation
+	FROM state_data
+   WHERE energy_source <> 'Total'	
+GROUP BY state,
+		 year
+	   )
+  SELECT sd.state,	
+  		 sd.year,
+		 sd.energy_source,
+		 sd.generation_mwh,
+		 to_char((sd.generation_mwh/(sgt.total_generation *1.00)*100),'999D99%') AS generation_percent
+    FROM state_data sd INNER JOIN StateGenerationTotal sgt
+	  ON sd.state = sgt.state
+	 AND sd.year = sgt.year
+   WHERE sgt.total_generation <> 0
+     AND sd.energy_source <> 'Total';	 
+
+
 
 -- state list (for drop downs, and metadata for pop-ups)
 	-- the view uses common table expressions (CTEs) to make things faster and more readable
