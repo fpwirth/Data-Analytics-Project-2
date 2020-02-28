@@ -32,114 +32,152 @@
 <body>
   <div class="container">
     <div class="row">
-        <div class="col-md-12">
-          <div class="jumbotron text-center green">
-            <div class="banner_h1">
-              <h1>The Big Green Dashboard</h1>
-              <h4>How we generate power affects our air</h4>
-            </div>
-          </div>      
-        </div>
-    </div>
-    <!-- row for filter -->
-    <div class="row" id="filter_row">
       <div class="col-md-12">
-        <div class="filter_div">
-          <div class="row">
-            <div class="col-md-12">
-              <h4>Interactive Filter</h4>
-            </div>
+        <div class="jumbotron text-center green">
+          <div class="banner_h1">
+            <h1>The Big Green Dashboard</h1>
+            <h4>How we generate and consume power affects our air</h4>
           </div>
-          <div class="row">
-            <div class="col-md-5">
-              <div id="year_slider" name="year_slider" style="height:10px; width:85%;"><label>Year</label></div>
-            </div>
-            <div class="col-md-3">
-              <label for="year_selected">Selected: </label>
-              <input type="text" id="year_selected" name="year_selected" readonly class="input_short">    
-            </div>
-            <div class="col-md-4">
-              <label for="state_selected">State: </label>        
-              <select id="state_selected" name="state_selected" size="1">
-              </select>  
-            </div>
-          </div>
-        </div>              
+        </div>      
       </div>
-    </div>        
-    <!-- other charts (2)-->
-    <div class="row" id="other_row">
-      <div class = "col-md-6">
-        <h5>Air Quality Data by State</h5>
-        <p>% of days where the air quality was good (green) and bad (red).  Switch between the stacked and grouped option. Watch the chart adjust as you slide the year. <a href="#" id="linkAirQuality">(see raw aqi data!)</a></p>
-        <div id="aqidiv">
-          <!-- put the first smaller chart here-->
-          <div id= "chart1">
-            <form>
-              <label><input type="radio" name="mode" value="grouped"> Grouped</label>
-              <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
-            </form>
+  </div>
+  <!-- row for filter -->
+  <div class="row" id="filter_row">
+    <div class="col-md-12">
+      <div class="filter_div">
+        <div class="row">
+          <div class="col-md-12">
+            <h4>Interactive Filter</h4>
           </div>
         </div>
-      </div>
-      <div class = "col-md-6">
-        <!-- put the second smaller chart here-->
-        <div id= "chart2">
+        <div class="row">
+          <div class="col-md-5">
+            <div id="year_slider" name="year_slider" style="height:10px; width:85%;"><label>Year</label></div>
+          </div>
+          <div class="col-md-3">
+            <label for="year_selected">Selected: </label>
+            <input type="text" id="year_selected" name="year_selected" readonly class="input_short">    
+          </div>
+          <div class="col-md-4">
+            <label for="state_selected">State: </label>        
+            <select id="state_selected" name="state_selected" size="1">
+            </select>  
+          </div>
+        </div>
+      </div>              
+    </div>
+  </div>        
+  <!-- other charts (2)-->
+  <div class="row" id="other_row">
+    <div class = "col-md-6">
+      <h5>Air Quality Data by State</h5>
+      <p>% of days where the air quality was good (green) and bad (red).  Switch between the stacked and grouped option. Watch the chart adjust as you slide the year. <a href="#" id="linkAirQuality">(see raw aqi data!)</a></p>
+      <div id="aqidiv">
+        <!-- put the first smaller chart here-->
+        <div id= "chart1">
+          <form>
+            <label><input type="radio" name="mode" value="grouped"> Grouped</label>
+            <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
+          </form>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <h5>State Greenhouse Emissions Data by State and Year</h5>
-        <p>Metric tons of CO2 emitted by each state for the year selected. This chart changes with the year slider and the state drop-down box. <a href="#" id="linkGreenhouse">(see raw greenhouse emissions data!)</a></p>
-        <div id="chart3">
-        </div>
+    <div class = "col-md-6">
+      <h5>Percentage Generation by Energy Source over Time</h5>
+      <p>How our generation by energy source has changed between 1990 and 2018.  This chart is connected to the drop-down state.  Notice the decreased role of coal over time.  <a href="#" id="linkEnergySrouce">(see energy source data!)</a></p>
+      <!-- put the second smaller chart here-->
+      <div id= "chart2">
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div id="chart4">
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div id="chart5">
-        </div>
-      </div>
-    </div>
-    <!-- heat map row-->
-    <div class="row" id="heatmap_row">
-      <div class = "col-md-12" id="heatmapdiv">
-        <!-- throw the heat map in here, #heat_map_chart-->
-        <div id="heatmap">
-        </div>
-      </div>
-    </div>    
-    <div id="sysmessage_dialog" title="System Message">
-      <span id="message_text"></span>
-    </div>
-    <!-- dialog box for air quality data -->
-    <div id="airQualityTableDialog" title="Air Quality Data">
-      <table id="airQualityTable" name="airQualityTable" class="display" width="100%">
-        <thead>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-    </div>
-    <!-- dialog box for greenhouse emissions data-->
-    <div id="greenhouseTableDialog" name ="greenhouseTableDialog" title="Greenhouse Emissions Data">
-      <table id="greenhouseTable" name="greenhouseTable" class="display" width="100%">
-        <thead>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
     </div>
   </div>
-<input type="hidden" id="aqiUrl" name="aqiUrl" value="data/air_quality_data">
+  <div class="row">
+    <div class="col-md-12">
+      <h5>State Greenhouse Emissions Data by State and Year</h5>
+      <p>Metric tons of CO2 emitted by each state for the year selected. This chart changes with the year slider and the state drop-down box. <a href="#" id="linkGreenhouse">(see raw greenhouse emissions data!)</a></p>
+      <div id="chart3">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h5>Generation Data MWh by State and Year</h5>
+      <p>The number of MWhs produced in the state for the year selected by the slider. This chart changes with the state drop-down box. <a href="#chart3" id="linkGeneration">(see raw generation data!)</a></p>
+      <div id="chart4">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h5>Cooling Degree Days by State and Year</h5>
+      <p>Basically how often is the state running their air conditioners! <a href="#chart4" id="linkCooling">(see raw cooling degree data!)</a></p>
+      <div id="chart5">
+      </div>
+    </div>
+  </div>
+  <!-- heat map row-->
+  <h5>Facility Emissions Heat Map by Year</h5>
+  <p>Click on "facilities" to see where the biggest polluters are (the circles are sized by the amount of emissions).  This chart is linked to the year slider in the filter.  <a href="#chart5" id="linkFacility">(see raw facility data summed up by state!)</a></p>
+  <div class="row" id="heatmap_row">
+    <div class = "col-md-12" id="heatmapdiv">
+      <!-- throw the heat map in here, #heat_map_chart-->
+      <div id="heatmap">
+      </div>
+    </div>
+  </div>    
+  <div id="sysmessage_dialog" title="System Message">
+    <span id="message_text"></span>
+  </div>
+  <!-- dialog box for air quality data -->
+  <div id="airQualityTableDialog" title="Air Quality Data">
+    <table id="airQualityTable" name="airQualityTable" class="display" width="100%">
+      <thead>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <!-- dialog box for state generation data data -->
+  <div id="stateGenerationTableDialog" title="State Generation Data">
+    <table id="stateGenerationTable" name="stateGenerationTable" class="display" width="100%">
+      <thead>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <!-- dialog box for degree day data -->
+  <div id="degreeTableDialog" title="Heating/Cooling Degree Days">
+    <table id="degreeTable" name="degreeTable" class="display" width="100%">
+      <thead>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <!-- dialog box for facility state emissions data -->
+  <div id="facilityStateTableDialog" title="Facility Emissions by State and Year">
+    <table id="facilityStateTable" name="facilityStateTable" class="display" width="100%">
+      <thead>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <!-- dialog box for greenhouse emissions data-->
+  <div id="greenhouseTableDialog" name ="greenhouseTableDialog" title="Greenhouse Emissions Data">
+    <table id="greenhouseTable" name="greenhouseTable" class="display" width="100%">
+      <thead>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</div>
+<input type="hidden" id="aqiUrl" name="aqiUrl" value="data/aqi_data">
 <input type="hidden" id="emissionUrl" name="emissionUrl" value="data/greenhouse_data">
+<input type="hidden" id="stateGenerationUrl" name="stateGenerationUrl" value="data/state_generation_data">
+<input type="hidden" id="degreeUrl" name="degreeUrl" value="data/degree_data">
+<input type="hidden" id="facilityStateUrl" name="facilityStateUrl" value="data/facility_state_data">
 <!-- custom application javascript file, using jquery and jquery ui-->
 <script type="text/javascript" src="static/js/config.js"></script>
 <script type="text/javascript" src="static/js/leaflet-heat.js"></script>
