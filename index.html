@@ -23,6 +23,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script><!--D3 cdn-->
   <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
   <script src="https://d3js.org/d3.v5.min.js"></script>
+  <!-- datatables css and javascript -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/ju/dt-1.10.20/datatables.min.css"/>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/ju/dt-1.10.20/datatables.min.js"></script>  
   <!-- link to custom CSS, used in all html pages in the project-->
   <link rel="stylesheet" href="static/css/styles.css">  
 </head>
@@ -66,13 +69,17 @@
     </div>        
     <!-- other charts (2)-->
     <div class="row" id="other_row">
-      <div class = "col-md-6" id='aqidiv'>
-        <!-- put the first smaller chart here-->
-        <div id= "chart1">
-          <form>
-            <label><input type="radio" name="mode" value="grouped"> Grouped</label>
-            <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
-          </form>
+      <div class = "col-md-6">
+        <h5>Air Quality Data</h5>
+        <p>% of days where the air quality was good (green) and bad (red).  Switch between the stacked and grouped option. <a href="#" id="linkAirQuality">(see raw data!)</a></p>
+        <div id="aqidiv">
+          <!-- put the first smaller chart here-->
+          <div id= "chart1">
+            <form>
+              <label><input type="radio" name="mode" value="grouped"> Grouped</label>
+              <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
+            </form>
+          </div>
         </div>
       </div>
       <div class = "col-md-6">
@@ -83,12 +90,7 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <div id="chart2">
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
+         <h5><a href="#" id="linkGreenhouse">(see raw data!)</a></h5>
         <div id="chart3">
         </div>
       </div>
@@ -107,7 +109,7 @@
     </div>
     <!-- heat map row-->
     <div class="row" id="heatmap_row">
-      <div class = "col-md-12" id='heatmapdiv'>
+      <div class = "col-md-12" id="heatmapdiv">
         <!-- throw the heat map in here, #heat_map_chart-->
         <div id="heatmap">
         </div>
@@ -115,6 +117,24 @@
     </div>    
     <div id="sysmessage_dialog" title="System Message">
       <span id="message_text"></span>
+    </div>
+    <!-- dialog box for air quality data -->
+    <div id="airQualityTableDialog" title="Air Quality Data">
+      <table id="airQualityTable" name="airQualityTable" class="display" width="100%">
+        <thead>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    <!-- dialog box for greenhouse emissions data-->
+    <div id="greenhouseTableDialog" name ="greenhouseTableDialog" title="Greenhouse Emissions Data">
+      <table id="greenhouseTable" name="greenhouseTable" class="display" width="100%">
+        <thead>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
     </div>
   </div>
 <!-- custom application javascript file, using jquery and jquery ui-->

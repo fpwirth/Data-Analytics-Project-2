@@ -39,6 +39,13 @@ h4 {
 
 }
 
+h5 {
+
+  text-align: center;
+
+}
+
+
 .green {
   position: relative;
   height: 150px;
@@ -116,6 +123,8 @@ h4 {
   margin-top:10px;
 }
 
-/* #state_selected-menu {
-  max-height: 300px;
-} */
+ #dataLink {
+
+  text-align: center;
+
+} 

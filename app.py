@@ -23,6 +23,9 @@ connection = psycopg2.connect(host=hostname, user=username, password=password, d
 state_list = pd.read_sql_query('select * from "state_list"',con=connection)
 state_data = pd.read_sql_query('select * from "state_data_by_year"',con=connection)
 facility_data = pd.read_sql_query('select * from "facility_emissions_by_year"',con=connection)
+aqi_data = pd.read_sql_query('select state, year, cbsa_code, days_with_aqi, good_days, moderate_days, unhealthy_days, unhealthy_sensitive_days, very_unhealthy_days, hazardous_days, aqi_max, aqi_90_percentile, aqi_median FROM air_quality ORDER BY state, year',con=connection)
+greenhouse_data = pd.read_sql_query('select state, year, round(greenhouse_emissions,0) as greenhouse_emissions from state_greenhouse_emissions order by state, year', con=connection)
+
 
 #####################
 # Flask Setup
@@ -53,6 +56,17 @@ def facilitydata():
 def statedata():
     """Return information related to state data"""
     return state_data.to_json(orient='records')
+
+@app.route("/data/aqi_data")
+def aqidata():
+    """Return information related to air quality data"""
+    return aqi_data.to_json(orient='split', index=False)
+
+@app.route("/data/greenhouse_data")
+def greenhousedata():
+    """Return information related to air quality data"""
+    return greenhouse_data.to_json(orient='split', index=False)
+
 
 if __name__ == '__main__':
     app.run()
