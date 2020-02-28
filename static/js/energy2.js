@@ -1,6 +1,6 @@
 //Initial variables for plots
-var stateurl='/data/state_data';
-var facilityurl='/data/facility_data';
+var stateurl='static/data/state_data.json';
+var facilityurl='static/data/facility_data.json';
 let year=2018;
 let stateplot='US';
 
