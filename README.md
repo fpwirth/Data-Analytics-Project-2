@@ -47,13 +47,20 @@ The project is made up of a PostgreSQL database, a flask application and a web-d
 ### Contents
 | File                        | Description                                                                                     |
 |-----------------------------|-------------------------------------------------------------------------------------------------|
-|energy_emissions\assets\images\energy_db_ERD.png     |ERD of our energy_db postgresSQL database.  Our semi-relational view of energy data, weather data and air quality by state and/or region|
+|Clean Data Files\*.csv   |The output files of the python cleaning notebooks.  They are then imported into PostgreSQL via a notebook called "import_data"|
+|energy_emissions\static\css\*.css     |All css files for the site, the "style.css" is custom, the rest are from open-sourced libraries|
+|energy_emissions\static\data\*.json     |All json files necessary to run the site without the flask application (i.e. from git.io)|
+|energy_emissions\static\images\*.png     |All images used by the read-me|
+|energy_emissions\static\js\*.js     |All the javascript files.  Some are open-sourced, some are blood sweat and tears custom.|
+|energy_emissions\static\app.py|Flask application!  Has a lot of data routes :) |
+|energy_emissions\static\jsondataapp.py|Application used to create the json files that can be used locally without Flask|
 |notebooks\AQI.ipynb          |Jupyter notebook that imports and cleans the air quality data by state.                          |
 |notebooks\group_analysis.ipynb         |scrap notebook, just checking the datasets out       |
 |notebooks\import_data.ipynb            |Notebook that will import all of the csv files in the "Clean Data Files" folder|
 |notebooks\Raw Data Importing.ipynb|Notebook that imports all of the EIA data|
 |sql\energy_db_ddl                  |Data definition language (ddl) for the energy_db database.  Run this script to create all the necessary tables/keys/views in the postgreSQL database.|
 |sql\foreign_key_list.sql           |script to retrieve all foreign keys that exist in the database, helpful info when dropping and adding the indexes.  |
+|sql\update_nulls.sql  |a lazy script to set some null values to 0, sorry Chris!|
 |sql\views.sql  |script to create all of the views that will be used by the flask app|
 
 
