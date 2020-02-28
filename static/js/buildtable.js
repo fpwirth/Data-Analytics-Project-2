@@ -19,7 +19,7 @@ $( document ).ready(function() {
     });
     $year_selected.val( $year_slider.slider( "value" ) );
 
-    // couldn't get the url to work, or by opening csv.  hard-coding states...
+    // couldn't get the url to work, or by opening csv. (I'm sorry you had to see this!)
     $state_selected.append(new Option('Alaska','AK')); 
     $state_selected.append(new Option('Alabama','AL')); 
     $state_selected.append(new Option('Arkansas','AR')); 
@@ -73,6 +73,7 @@ $( document ).ready(function() {
     $state_selected.append(new Option('Wyoming','WY')); 
     $state_selected.append(new Option('Washington DC','DC')); 
     
+    // set initial value to US (total)
     $state_selected.val('US');
 
     // dialog for system messages
@@ -96,12 +97,15 @@ $( document ).ready(function() {
     // span for message text
     var $message_text = $('#message_text');
 
+    // get url for link to aqi data
     var aqi_url = $('#aqiUrl').val();
+    // initialize the datatable, which pulls the json from the url
     var $airQualityTable = $('#airQualityTable').DataTable({
         'ajax': {
             url: aqi_url,
             dataSrc: 'data'
         },
+        // providing user friendly column names
         columns: [
             { title: "State"},
             { title: "Year"},
@@ -116,12 +120,15 @@ $( document ).ready(function() {
         ]
     })
 
+    // adding click function to the link to data anchor 
     $('#linkAirQuality').click(function() {
 
+        // opening the dialog that contains the air quality data
         $airQualityTableDialog.dialog('open');
 
     })
 
+    // defining the air quality dialog, which contains the datatable object
     var $airQualityTableDialog = $('#airQualityTableDialog').dialog({
         autoOpen: false,
         modeal: true,
@@ -134,6 +141,7 @@ $( document ).ready(function() {
         height: "auto",
         buttons: [
             {
+                // just a boring close button
                 text: "Close",
                 class: "ui-button ui-widget ui-corner-all",
                 click: function() {
@@ -143,6 +151,7 @@ $( document ).ready(function() {
         ]
     })
 
+    // defining the dialoog for the greenhouse emissions table
     var $greenhouseTableDialog = $('#greenhouseTableDialog').dialog({
         autoOpen: false,
         modeal: true,
@@ -155,6 +164,7 @@ $( document ).ready(function() {
         height: "auto",
         buttons: [
             {
+                // boring close again
                 text: "Close",
                 class: "ui-button ui-widget ui-corner-all",
                 click: function() {
@@ -164,14 +174,16 @@ $( document ).ready(function() {
         ]
     });
 
-    var greenhouse_url = $('#emissionUrl').val();
-    // console.log(greenhouse_url);
 
+    // get the url to the greenhouse emissions
+    var greenhouse_url = $('#emissionUrl').val();
+    // initialiize the greenhouse emissions Data table, which pulls json data from url
     var $greenhouseTable = $('#greenhouseTable').DataTable({
         'ajax': {
             url: greenhouse_url,
             dataSrc: 'data'
         },
+        // column names
         columns: [
             { title: "State"},
             { title: "Year"},
@@ -179,11 +191,168 @@ $( document ).ready(function() {
         ]
     })
 
+    // click function for link to greenhouse emissions data
     $('#linkGreenhouse').click(function() {
 
+        // opening the greenhouse emissions dialog and table
         $greenhouseTableDialog.dialog('open');
 
     })
 
+    // defining the dialoog for the state generation table
+    var $stateGenerationTableDialog = $('#stateGenerationTableDialog').dialog({
+        autoOpen: false,
+        modeal: true,
+        position: { 
+            my: "center", 
+            at: "top" 
+        },
+        width: "66%",
+        maxWidth: "768px",
+        height: "auto",
+        buttons: [
+            {
+                // boring close again
+                text: "Close",
+                class: "ui-button ui-widget ui-corner-all",
+                click: function() {
+                    $stateGenerationTableDialog.dialog('close');
+                }
+            }
+        ]
+    });
+
+
+    // get the url to the state generation data
+    var stateGeneration_url = $('#stateGenerationUrl').val();
+    // initialiize the state generation Data table, which pulls json data from url
+    var $stateGenerationTable = $('#stateGenerationTable').DataTable({
+        'ajax': {
+            url: stateGeneration_url,
+            dataSrc: 'data'
+        },
+        // column names
+        columns: [
+            { title: "State"},
+            { title: "Year"},
+            { title: "Energy Source"},            
+            { title: "Generation (MWh)"},
+            { title: "% of Total Generation"}
+        ]
+    })
+
+    // click function for link to state generation data
+    $('#linkEnergySrouce').click(function() {
+
+        // opening the state generation dialog and table
+        $stateGenerationTableDialog.dialog('open');
+
+    })
+    // add the same click function to the other plotly chart's reference to generation raw data
+        // this is mainly due to lazyness
+    $('#linkGeneration').click(function() {
+
+        // opening the greenhouse emissions dialog and table
+        $stateGenerationTableDialog.dialog('open');
+
+    })
+    
+    // defining the dialoog for the degree day table
+    var $degreeTableDialog = $('#degreeTableDialog').dialog({
+        autoOpen: false,
+        modeal: true,
+        position: { 
+            my: "center", 
+            at: "top" 
+        },
+        width: "66%",
+        maxWidth: "768px",
+        height: "auto",
+        buttons: [
+            {
+                // boring close again
+                text: "Close",
+                class: "ui-button ui-widget ui-corner-all",
+                click: function() {
+                    $degreeTableDialog.dialog('close');
+                }
+            }
+        ]
+    });
+
+
+    // get the url to the degree day data
+    var degree_url = $('#degreeUrl').val();
+    // initialiize the degree day Data table, which pulls json data from url
+    var $degreeTable = $('#degreeTable').DataTable({
+        'ajax': {
+            url: degree_url,
+            dataSrc: 'data'
+        },
+        // column names
+        columns: [
+            { title: "Region"},
+            { title: "States in Region"},
+            { title: "Year"},            
+            { title: "Cooling Degree Days"},
+            { title: "Heating Degree Days"}
+        ]
+    })
+
+    // click function for link to degree day data
+    $('#linkCooling').click(function() {
+
+        // opening the degree days dialog and table
+        $degreeTableDialog.dialog('open');
+
+    })    
+
+    // defining the dialog for the facility/state emissions data
+    var $facilityStateTableDialog = $('#facilityStateTableDialog').dialog({
+        autoOpen: false,
+        modeal: true,
+        position: { 
+            my: "center", 
+            at: "top" 
+        },
+        width: "66%",
+        maxWidth: "768px",
+        height: "auto",
+        buttons: [
+            {
+                // boring close again
+                text: "Close",
+                class: "ui-button ui-widget ui-corner-all",
+                click: function() {
+                    $facilityStateTableDialog.dialog('close');
+                }
+            }
+        ]
+    });
+
+
+    // get the url to the facility/state emissions data
+    var facility_state_url = $('#facilityStateUrl').val();
+    // initialiize the facility/state emissions Data table, which pulls json data from url
+    var $facilityStateTable = $('#facilityStateTable').DataTable({
+        'ajax': {
+            url: facility_state_url,
+            dataSrc: 'data'
+        },
+        // column names
+        columns: [
+            { title: "State"},
+            { title: "Year"},            
+            { title: "Total Power Facility Emissions"}
+        ]
+    })
+
+    // click function for link to degree day data
+    $('#linkFacility').click(function() {
+
+        // opening the degree days dialog and table
+        $facilityStateTableDialog.dialog('open');
+
+    })    
 
 });
