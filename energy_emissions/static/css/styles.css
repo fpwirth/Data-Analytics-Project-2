@@ -81,6 +81,15 @@ h5 {
 
 }
 
+#filter_row {
+
+  position:fixed;
+  /* top:200px; */
+  width:66%;
+  z-index:100;
+
+}
+
 .filter_div {
 
   background-color: rgb(199, 235, 99) !important; 
@@ -90,6 +99,11 @@ h5 {
   margin-bottom: 20px;
   padding-left: 5px;
   padding-bottom: 10px;
+
+  
+  opacity: 1; /* Standard: FF gt 1.5, Opera, Safari, CSS3 */
+  filter: alpha(opacity=100); /* IE lt 8 */
+  
 }
 
 .filter_div label {
