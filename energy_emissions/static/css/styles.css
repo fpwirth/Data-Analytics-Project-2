@@ -83,8 +83,8 @@ h5 {
 #filter_row {
 
   position:fixed;
-  top:0;
-  width:100%;
+  /* top:200px; */
+  width:66%;
   z-index:100;
 
 }
@@ -97,6 +97,11 @@ h5 {
   margin-top: 10px;
   padding-left: 5px;
   padding-bottom: 10px;
+
+  
+  opacity: 1; /* Standard: FF gt 1.5, Opera, Safari, CSS3 */
+  filter: alpha(opacity=100); /* IE lt 8 */
+  
 }
 
 .filter_div label {
