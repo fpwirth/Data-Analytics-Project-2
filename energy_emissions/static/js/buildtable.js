@@ -28,7 +28,7 @@ $( document ).ready(function() {
           $el.css({
               'position': 'fixed', 
               'top': '0px',
-              'width': '66%',              
+            //   'width': 'auto',              
               'opacity': '.70',
               'background-color': 'darkgrey',
               'filter': 'alpha(opacity=70)'
@@ -37,8 +37,8 @@ $( document ).ready(function() {
         if ($(this).scrollTop() < 250 && isPositionFixed){
           $el.css({
               'position': 'static', 
-              'top': '200px',
-              'width': '96%',
+            //   'top': '200px',
+            //   'width': '96%',
               'background-color': 'transparent',              
               'opacity': '1'
             }); 
