@@ -28,7 +28,7 @@ $( document ).ready(function() {
           $el.css({
               'position': 'fixed', 
               'top': '0px',
-            //   'width': 'auto',              
+              'width': '66%',              
               'opacity': '.70',
               'background-color': 'darkgrey',
               'filter': 'alpha(opacity=70)'
@@ -38,7 +38,7 @@ $( document ).ready(function() {
           $el.css({
               'position': 'static', 
             //   'top': '200px',
-            //   'width': '96%',
+              'width': '100%',
               'background-color': 'transparent',              
               'opacity': '1'
             }); 
