@@ -93,23 +93,27 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
         <h5>State Greenhouse Emissions Data by State and Year</h5>
-        <p>Metric tons of CO2 emitted by each state for the year selected. This chart changes with the year slider and the state drop-down box. <a href="#" id="linkGreenhouse">(see raw greenhouse emissions data!)</a></p>
+        <p>Metric tons of CO<sub>2</sub> emitted by each state for the year selected. This chart changes with the year slider and the state drop-down box. <a href="#" id="linkGreenhouse">(see raw greenhouse emissions data!)</a></p>
         <div id="chart3">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h5>Power Produced by "Green" Energy Sources</h5>
+        <p>So how are the states doing producing power with no emissions (aka: Using Nuclear, Hydro, Pumped Storage, Solar, Wind).</p>
+        <div id="chart8">
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
         <h5>Generation Data MWh by State and Year</h5>
         <p>The number of MWhs produced in the state for the year selected by the slider. This chart changes with the state drop-down box. <a href="#chart3" id="linkGeneration">(see raw generation data!)</a></p>
         <div id="chart4">
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
         <h5>Cooling Degree Days by State and Year</h5>
         <p>Basically how often is the state running their air conditioners! <a href="#chart4" id="linkCooling">(see raw cooling degree data!)</a></p>
         <div id="chart5">
@@ -117,17 +121,15 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
-        <h5>Chart 6</h5>
-        <p>description here</p>
+      <div class="col-md-6">
+        <h5>Coal Consumed to Produce Power by State and Year</h5>
+        <p>So where is power produced by the bad stuff!</p>
         <div id="chart6">
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <h5>Chart 7</h5>
-        <p>description chart 7 here</p>
+      <div class="col-md-6">
+        <h5>Natural Gas Consumed to Produce Power by State and Year</h5>
+        <p>Power produced by natural gas. Yes a fossil fuel but better than COAL!</p>
         <div id="chart7">
         </div>
       </div>
@@ -205,5 +207,8 @@
 <script type="text/javascript" src="static/js/buildplot.js"></script>
 <script type="text/javascript" src="static/js/buildmap.js"></script>
 <script type="text/javascript" src="static/js/energy2.js"></script>
+<div id="copyright"><br>
+<p>Copyright &#169; 2020 Milano, Dowlin and Wirth. All Rights Reserved.</p>
+</div>
 </body>
 </html>

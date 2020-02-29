@@ -11,7 +11,8 @@ function buildmap(stateurl,yearmap){
         var generationvalues=filteredyear.map(state=>state.generation_mwh_total);
         var coolingvalues=filteredyear.map(state=>state.cooling_degree_days);
         var coalvalues=filteredyear.map(state=>state.consumption_coal);
-        console.log(filteredyear);
+        var ngvalues=filteredyear.map(state=>state.consumption_ng);
+        var greenvalues=filteredyear.map(state=>state.generation_mwh_solar+state.generation_mwh_hydro+state.generation_mwh_wind+state.generation_mwh_nuclear+state.generation_mwh_pumped);
         //Create year greenhouse emissions map plot
         var mapdata=[{
         type:'choropleth',
@@ -21,7 +22,7 @@ function buildmap(stateurl,yearmap){
         text:statenames,
         autocolorscale:true}];
         var maplayout={
-        title:`${year} State Greenhouse Emissions (metric tons of carbon dioxide)`,
+        title:`${year} State Greenhouse Emissions (metric tons of CO<sub>2</sub>)`,
         plot_bgcolor:'rgb(215,215,215)',
         paper_bgcolor:'rgb(215,215,215)',
         geo:{
@@ -107,4 +108,52 @@ function buildmap(stateurl,yearmap){
                 subunitcolor:'rgb(255,255,255)',
                 lonaxis:{},
                 lataxis:{}}};
-            Plotly.newPlot('chart6',mapdata,maplayout);});};
+            Plotly.newPlot('chart6',mapdata,maplayout);
+        //Create year natural gas consumption map plot
+        var mapdata=[{
+            type:'choropleth',
+            locationmode:'USA-states',
+            locations:states,
+            z:ngvalues,
+            text:statenames,
+            autocolorscale:true}];
+            var maplayout={
+            title:`${year} State Natural Gas Consumption (Mcf)`,
+            plot_bgcolor:'rgb(215,215,215)',
+            paper_bgcolor:'rgb(215,215,215)',
+            geo:{
+                bgcolor:'rgb(215,215,215)',
+                scope:'usa',
+                countrycolor:'rgb(255,255,255)',
+                showland:true,
+                landcolor:'rgb(255,255,255)',
+                showlakes:true,
+                lakecolor:'rgb(52,177,242)',
+                subunitcolor:'rgb(255,255,255)',
+                lonaxis:{},
+                lataxis:{}}};
+            Plotly.newPlot('chart7',mapdata,maplayout);
+        //Create year green generation map plot
+        var mapdata=[{
+            type:'choropleth',
+            locationmode:'USA-states',
+            locations:states,
+            z:greenvalues,
+            text:statenames,
+            autocolorscale:true}];
+            var maplayout={
+            title:`${year} State Green Generation (MWh)`,
+            plot_bgcolor:'rgb(215,215,215)',
+            paper_bgcolor:'rgb(215,215,215)',
+            geo:{
+                bgcolor:'rgb(215,215,215)',
+                scope:'usa',
+                countrycolor:'rgb(255,255,255)',
+                showland:true,
+                landcolor:'rgb(255,255,255)',
+                showlakes:true,
+                lakecolor:'rgb(52,177,242)',
+                subunitcolor:'rgb(255,255,255)',
+                lonaxis:{},
+                lataxis:{}}};
+            Plotly.newPlot('chart8',mapdata,maplayout);});};

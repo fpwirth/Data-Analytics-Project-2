@@ -37,13 +37,13 @@ function buildplot(stateurl,stateplot){
         // {x:years,y:windvalues,name:'Wind',stackgroup:'one'},
         // {x:years,y:pumpedvalues,name:'Pumped Storage',stackgroup:'one'},
         {x:years,y:greenvalues,name:'No Emission Sources',stackgroup:'one',line:{color:'#00FF00',width:.5}},
-        {x:years,y:co2values,name:'CO2 Emissions',yaxis:'y2',type:'scatter',line:{color:'#FFFACD'}},
+        {x:years,y:co2values,name:'CO<sub>2</sub> Emissions',yaxis:'y2',type:'scatter',line:{color:'#FFFACD'}},
         {x:years,y:greenhousevalues,name:'Greenhouse Emissions',yaxis:'y2',type:'scatter',line:{color:'#FFFF00'}}];
         var genlayout={
         title:`${state} Power Generation by Type`,
         plot_bgcolor:'rgb(215,215,215)',
         paper_bgcolor:'rgb(215,215,215)',
         yaxis:{title:'Generation (MWh)'},
-        yaxis2:{title:'Emissions (metric tons of carbon dioxide)',overlaying:'y',side:'right'},
+        yaxis2:{title:'Emissions (metric tons of CO<sub>2</sub>)',overlaying:'y',side:'right'},
         legend:{orientation:'h'}};
         Plotly.newPlot('chart2',gentraces,genlayout);});}
