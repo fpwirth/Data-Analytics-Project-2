@@ -30,6 +30,7 @@ $( document ).ready(function() {
               'top': '0px',
               'width': '66%',              
               'opacity': '.70',
+              'background-color': 'darkgrey',
               'filter': 'alpha(opacity=70)'
            }); 
         }
@@ -38,6 +39,7 @@ $( document ).ready(function() {
               'position': 'static', 
               'top': '200px',
               'width': '96%',
+              'background-color': 'transparent',              
               'opacity': '1'
             }); 
         } 
