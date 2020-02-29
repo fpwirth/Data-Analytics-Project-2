@@ -23,22 +23,22 @@ function buildplot(stateurl,stateplot){
         var pumpedvalues=filteredstate.map(year=>year.generation_mwh_pumped);
         var greenvalues=filteredstate.map(year=>year.generation_mwh_solar+year.generation_mwh_hydro+year.generation_mwh_wind+year.generation_mwh_nuclear+year.generation_mwh_pumped);
         var gentraces=[
-        {x:years,y:coalvalues,name:'Coal',stackgroup:'one',groupnorm:'percent',line:{width:.5}},
-        {x:years,y:petrovalues,name:'Petroleum',stackgroup:'one',line:{width:.5}},
-        {x:years,y:ngvalues,name:'Natural Gas',stackgroup:'one',line:{width:.5}},
-        {x:years,y:othergasvalues,name:'Other Gases',stackgroup:'one',line:{width:.5}},
-        {x:years,y:othervalues,name:'Other',stackgroup:'one',line:{width:.5}},
-        {x:years,y:geothermalvalues,name:'Geothermal',stackgroup:'one',line:{width:.5}},
-        {x:years,y:woodvalues,name:'Wood',stackgroup:'one',line:{width:.5}},
-        {x:years,y:otherbiomassvalues,name:'Other Biomass',stackgroup:'one',line:{width:.5}},
+        {x:years,y:coalvalues,name:'Coal',stackgroup:'one',groupnorm:'percent',line:{color:'black',width:.5}},
+        {x:years,y:petrovalues,name:'Petroleum',stackgroup:'one',line:{color:'gray',width:.5}},
+        {x:years,y:ngvalues,name:'Natural Gas',stackgroup:'one',line:{color:'#00FFFF',width:.5}},
+        {x:years,y:othergasvalues,name:'Other Gases',stackgroup:'one',line:{color:'orange',width:.5}},
+        {x:years,y:othervalues,name:'Other',stackgroup:'one',line:{color:'yellow',width:.5}},
+        {x:years,y:geothermalvalues,name:'Geothermal',stackgroup:'one',line:{color:'red',width:.5}},
+        {x:years,y:woodvalues,name:'Wood',stackgroup:'one',line:{color:'#808000',width:.5}},
+        {x:years,y:otherbiomassvalues,name:'Other Biomass',stackgroup:'one',line:{color:'#9400D3',width:.5}},
         // {x:years,y:nuclearvalues,name:'Nuclear',stackgroup:'one'},
         // {x:years,y:hydrovalues,name:'Hydro',stackgroup:'one'},
         // {x:years,y:solarvalues,name:'Solar',stackgroup:'one'},
         // {x:years,y:windvalues,name:'Wind',stackgroup:'one'},
         // {x:years,y:pumpedvalues,name:'Pumped Storage',stackgroup:'one'},
-        {x:years,y:greenvalues,name:'No Emission Sources',stackgroup:'one',line:{width:.5}},
-        {x:years,y:co2values,name:'CO2 Emissions',yaxis:'y2',type:'scatter'},
-        {x:years,y:greenhousevalues,name:'Greenhouse Emissions',yaxis:'y2',type:'scatter'}];
+        {x:years,y:greenvalues,name:'No Emission Sources',stackgroup:'one',line:{color:'#00FF00',width:.5}},
+        {x:years,y:co2values,name:'CO2 Emissions',yaxis:'y2',type:'scatter',line:{color:'#FFFACD'}},
+        {x:years,y:greenhousevalues,name:'Greenhouse Emissions',yaxis:'y2',type:'scatter',line:{color:'#FFFF00'}}];
         var genlayout={
         title:`${state} Power Generation by Type`,
         plot_bgcolor:'rgb(215,215,215)',
