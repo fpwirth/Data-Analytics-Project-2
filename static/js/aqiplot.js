@@ -83,7 +83,7 @@ function aqiPlot(stateurl,aqiyear){
     
         var color = d3.scaleLinear()
             .domain([0, n - 1])
-            .range(["mediumaquamarine", "darkred"]);
+            .range(["limegreen", "crimson"]);
     
         var xAxis = d3.axisBottom()
             .scale(x)
