@@ -19,6 +19,28 @@ $( document ).ready(function() {
     });
     $year_selected.val( $year_slider.slider( "value" ) );
 
+
+    // filter_row
+    $(window).scroll(function(e){ 
+        var $el = $('#filter_row'); 
+        var isPositionFixed = ($el.css('position') == 'fixed');
+        if ($(this).scrollTop() > 250 && !isPositionFixed){ 
+          $el.css({
+              'position': 'fixed', 
+              'top': '0px',
+              'width': '66%'
+           }); 
+        }
+        if ($(this).scrollTop() < 250 && isPositionFixed){
+          $el.css({
+              'position': 'static', 
+              'top': '200px',
+              'width': '96%'
+            }); 
+        } 
+      });
+
+
     // couldn't get the url to work, or by opening csv. (I'm sorry you had to see this!)
     $state_selected.append(new Option('Alaska','AK')); 
     $state_selected.append(new Option('Alabama','AL')); 
