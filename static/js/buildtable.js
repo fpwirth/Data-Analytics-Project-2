@@ -20,7 +20,7 @@ $( document ).ready(function() {
     $year_selected.val( $year_slider.slider( "value" ) );
 
 
-    // filter_row
+    // filter_row floating div!
     $(window).scroll(function(e){ 
         var $el = $('#filter_row'); 
         var isPositionFixed = ($el.css('position') == 'fixed');
@@ -28,14 +28,17 @@ $( document ).ready(function() {
           $el.css({
               'position': 'fixed', 
               'top': '0px',
-              'width': '66%'
+              'width': '66%',              
+              'opacity': '.70',
+              'filter': 'alpha(opacity=70)'
            }); 
         }
         if ($(this).scrollTop() < 250 && isPositionFixed){
           $el.css({
               'position': 'static', 
               'top': '200px',
-              'width': '96%'
+              'width': '96%',
+              'opacity': '1'
             }); 
         } 
       });
