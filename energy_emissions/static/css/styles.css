@@ -17,6 +17,7 @@ p {
 h1 {
   color: white !important;
   /* text-shadow: -1px 0 chartreuse, 0 1px chartreuse, 1px 0 chartreuse, 0 -1px chartreuse; */
+  text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000
 }
 
 h2 {
@@ -48,24 +49,24 @@ h5 {
 
 .green {
   position: relative;
-  height: 150px;
+  height: 180px;
   padding-top: 1px;
   margin-top: 100px;
   /* padding: 20px; */
   margin: 0;
   background: black;
-  background-image: url("../images/banner_background.jpg");
+  background-image: url("../images/light.jpg");
   background-attachment: fixed;
-  background-position: bottom center;
-  background-size: auto 150px;;
+  /* background-position: bottom center; */
+  background-size: 620px;
 }
 
 .banner_h1 {
 
-  /* background-color: white; */
-  background-image: linear-gradient(lightblue, lightgreen);
+  background-color: rgba(255, 255, 255, 0.7);
+  /* background-image: linear-gradient(lightblue, lightgreen); */
   width: 100%;
-  border-radius: 25px;
+  /* border-radius: 25px; */
   /* height: 300px; */
 
 }
@@ -80,14 +81,23 @@ h5 {
 
 }
 
+#filter_row {
+
+  /* top:200px; */
+  z-index:100;
+
+}
+
 .filter_div {
 
-  background-color: rgb(204, 241, 204) !important; 
+  background-color: rgb(199, 235, 99) !important; 
   border-radius: 25px; 
   padding-top: 10px;
   margin-top: 10px;
+  margin-bottom: 20px;
   padding-left: 5px;
   padding-bottom: 10px;
+  
 }
 
 .filter_div label {
