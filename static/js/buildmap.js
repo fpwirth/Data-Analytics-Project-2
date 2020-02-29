@@ -93,7 +93,7 @@ function buildmap(stateurl,yearmap){
             text:statenames,
             autocolorscale:true}];
             var maplayout={
-            title:`${year} State Coal Consumption (metric tons)`,
+            title:`${year} State Coal Consumption (Short Tons)`,
             plot_bgcolor:'rgb(215,215,215)',
             paper_bgcolor:'rgb(215,215,215)',
             geo:{
