@@ -80,6 +80,15 @@ h5 {
 
 }
 
+#filter_row {
+
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:100;
+
+}
+
 .filter_div {
 
   background-color: rgb(204, 241, 204) !important; 
