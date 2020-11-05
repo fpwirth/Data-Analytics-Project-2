@@ -14,29 +14,33 @@ function buildheat(facilityurl,yearheat){
         heatlayer.push(location);
         facility.push(marker);};
     //Create basemaps
-        var street=L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',{
-        attribution:'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom:18,
-        id:'mapbox.streets',
-        accessToken:API_KEY});
-        var comic=L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',{
-        attribution:'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom:18,
-        id:'mapbox.comic',
-        accessToken:API_KEY});
+        var street=L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
+            tileSize: 512,
+            maxZoom: 18,
+            zoomOffset: -1,
+            id: 'mapbox/streets-v11',
+            accessToken:API_KEY});
+        var satellitemap=L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
+            tileSize: 512,
+            maxZoom: 18,
+            zoomOffset: -1,
+            id:'mapbox/satellite-v9',
+            accessToken:API_KEY});
         var basemaps={
-        'Street Map':street,
-        'USA Map':comic};
+            'Street Map':street,
+            'Satellite Map':satellitemap};
         var map=L.map('heatmap',{
-        center:[39.8333,-98.5833],
-        zoom:4,
-        layers:[street]});
+            center:[39.8333,-98.5833],
+            zoom:4,
+            layers:[street]});
     //Create heatlayer for year
         L.heatLayer(heatlayer,{
-        radius: 5,
-        blur: 10
-        }).addTo(map);
+            radius: 5,
+            blur: 10
+            }).addTo(map);
     //Create layer control for map
         var overlaymaps={
-        'Power Plants':L.layerGroup(facility)};
-        L.control.layers(basemaps,overlaymaps,{collapsed:false}).addTo(map);});};
+            'Power Plants':L.layerGroup(facility)};
+            L.control.layers(basemaps,overlaymaps,{collapsed:false}).addTo(map);});};
